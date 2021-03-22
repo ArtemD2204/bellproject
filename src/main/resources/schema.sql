@@ -46,13 +46,11 @@ CREATE TABLE IF NOT EXISTS Document (
 
 CREATE TABLE IF NOT EXISTS Document_Type (
     code       INTEGER                COMMENT 'Код типа документа - Уникальный идентификатор' PRIMARY KEY ,
-    version    INTEGER NOT NULL       COMMENT 'Служебное поле hibernate',
     name       VARCHAR(150) NOT NULL  COMMENT 'Название типа документа'
 );
 
 CREATE TABLE IF NOT EXISTS Country (
     code       INTEGER                COMMENT 'Код страны - Уникальный идентификатор' PRIMARY KEY ,
-    version    INTEGER NOT NULL       COMMENT 'Служебное поле hibernate',
     name       VARCHAR(150) NOT NULL  COMMENT 'Название страны'
 );
 
