@@ -1,6 +1,6 @@
 package ru.artemdikov.bellproject.user.model;
 
-import ru.artemdikov.bellproject.country.model.Country;
+import ru.artemdikov.bellproject.directory.model.Country;
 import ru.artemdikov.bellproject.document.model.Document;
 import ru.artemdikov.bellproject.office.model.Office;
 
@@ -70,8 +70,7 @@ public class User {
     /**
      * Документ
      */
-    @OneToOne
-    @JoinColumn(name = "doc_id", referencedColumnName = "id")
+    @OneToOne(mappedBy = "user")
     private Document document;
 
     /**

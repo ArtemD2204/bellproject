@@ -1,4 +1,4 @@
-package ru.artemdikov.bellproject.country.model;
+package ru.artemdikov.bellproject.directory.model;
 
 import ru.artemdikov.bellproject.user.model.User;
 

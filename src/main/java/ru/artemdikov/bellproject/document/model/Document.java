@@ -1,6 +1,6 @@
 package ru.artemdikov.bellproject.document.model;
 
-import ru.artemdikov.bellproject.documenttype.model.DocumentType;
+import ru.artemdikov.bellproject.directory.model.DocumentType;
 import ru.artemdikov.bellproject.user.model.User;
 
 import javax.persistence.*;
@@ -46,7 +46,8 @@ public class Document {
     /**
      * Пользователь
      */
-    @OneToOne(mappedBy = "document")
+    @OneToOne
+    @JoinColumn(name = "id", referencedColumnName = "id")
     private User user;
 
     public Long getId() {

@@ -6,7 +6,7 @@ import ma.glasnost.orika.MappingContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.artemdikov.bellproject.document.model.Document;
-import ru.artemdikov.bellproject.documenttype.model.DocumentType;
+import ru.artemdikov.bellproject.directory.model.DocumentType;
 import ru.artemdikov.bellproject.model.mapper.MapperFacade;
 import ru.artemdikov.bellproject.user.dto.UserDto;
 import ru.artemdikov.bellproject.user.model.User;

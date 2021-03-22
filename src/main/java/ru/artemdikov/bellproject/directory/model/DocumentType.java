@@ -1,4 +1,4 @@
-package ru.artemdikov.bellproject.documenttype.model;
+package ru.artemdikov.bellproject.directory.model;
 
 import ru.artemdikov.bellproject.document.model.Document;
 
