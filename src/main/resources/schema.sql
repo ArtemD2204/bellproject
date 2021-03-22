@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS Document (
     id         INTEGER              COMMENT 'Уникальный идентификатор и foreign key на User' PRIMARY KEY,
     version    INTEGER NOT NULL     COMMENT 'Служебное поле hibernate',
     doc_number VARCHAR(30) NOT NULL COMMENT 'Номер документа',
-    doc_date   DATE                 COMMENT 'Дата документа',
+    doc_date   DATE NOT NULL        COMMENT 'Дата документа',
     doc_code   INTEGER NOT NULL     COMMENT 'Тип документа'
 );
 
