@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS Office (
     name                VARCHAR(150) NOT NULL   COMMENT 'Название',
     address             VARCHAR(255) NOT NULL   COMMENT 'Адрес',
     phone               VARCHAR(30)             COMMENT 'Телефон',
-    is_active           BOOLEAN DEFAULT true,   COMMENT 'Просто boolean',
+    is_active           BOOLEAN DEFAULT true   COMMENT 'Просто boolean',
     organization_id     INTEGER NOT NULL        COMMENT 'Уникальный идентификатор организации'
 );
 COMMENT ON TABLE Office IS 'Офис';
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS User (
     middle_name     VARCHAR(50)             COMMENT 'Отчество',
     position        VARCHAR(100) NOT NULL   COMMENT 'Должность',
     phone           VARCHAR(30)             COMMENT 'Телефон',
-    is_identified   BOOLEAN DEFAULT true,   COMMENT 'Просто boolean',
+    is_identified   BOOLEAN DEFAULT true    COMMENT 'Просто boolean',
     office_id       INTEGER NOT NULL        COMMENT 'Офис',
     country_code    CHAR(3)                 COMMENT 'Код страны'
 );
