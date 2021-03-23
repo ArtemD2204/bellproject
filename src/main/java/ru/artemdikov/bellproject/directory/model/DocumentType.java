@@ -1,10 +1,6 @@
 package ru.artemdikov.bellproject.directory.model;
 
-import ru.artemdikov.bellproject.document.model.Document;
-
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Вид документа
@@ -20,22 +16,10 @@ public class DocumentType {
     private String code;
 
     /**
-     * Служебное поле hibernate
-     */
-//    @Version
-//    private Integer version;
-
-    /**
      * Название
      */
     @Column(name = "name", length = 150, nullable = false)
     private String name;
-
-    /**
-     * Пользователи
-     */
-    @OneToMany(mappedBy = "documentType")
-    private Set<Document> documents;
 
     public String getCode() {
         return code;
@@ -53,14 +37,4 @@ public class DocumentType {
         this.name = name;
     }
 
-    public Set<Document> getDocuments() {
-        if (documents == null) {
-            documents = new HashSet<>();
-        }
-        return documents;
-    }
-
-    public void setDocuments(Set<Document> documents) {
-        this.documents = documents;
-    }
 }

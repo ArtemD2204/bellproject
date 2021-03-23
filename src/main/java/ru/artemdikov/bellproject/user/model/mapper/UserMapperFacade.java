@@ -22,34 +22,10 @@ import java.util.Locale;
 @Service
 public class UserMapperFacade implements MapperFacade<User, UserDto> {
     private final MapperFactory mapperFactory;
-    private final CustomMapper<User, UserDto> userCustomMapper;
 
     @Autowired
     public UserMapperFacade(MapperFactory mapperFactory) {
         this.mapperFactory = mapperFactory;
-
-        DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy", Locale.ENGLISH);
-        this.userCustomMapper = new CustomMapper<User, UserDto>() {
-            @Override
-            public void mapAtoB(User user, UserDto userDto, MappingContext context) {
-//                userDto.setOfficeId(user.getOffice().getId());
-                Document document = user.getDocument();
-                if (document != null) {
-                    userDto.setDocDate(dateFormat.format(document.getDocDate()));
-//                    userDto.setDocNumber(document.getDocNumber());
-//                    DocumentType documentType = document.getDocumentType();
-//                    if (documentType != null) {
-//                        userDto.setDocCode(documentType.getCode());
-//                        userDto.setD
-//                    }
-                }
-            }
-
-            @Override
-            public void mapBtoA(UserDto userDto, User user, MappingContext context) {
-
-            }
-        };
     }
 
     /**
@@ -90,7 +66,6 @@ public class UserMapperFacade implements MapperFacade<User, UserDto> {
 
     private void configure() {
         mapperFactory.classMap(User.class, UserDto.class)
-//                .customize(userCustomMapper)
                 .field("office.id", "officeId")
                 .field("country.code", "citizenshipCode")
                 .field("document.documentType.code", "docCode")

@@ -1,10 +1,6 @@
 package ru.artemdikov.bellproject.organization.model;
 
-import ru.artemdikov.bellproject.office.model.Office;
-
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Оранизация
@@ -66,12 +62,6 @@ public class Organization {
     @Column(name = "is_active", columnDefinition = "boolean default true")
     private Boolean isActive;
 
-    /**
-     * Офисы
-     */
-    @OneToMany(mappedBy = "organization")
-    private Set<Office> offices;
-
     public Long getId() {
         return id;
     }
@@ -132,14 +122,4 @@ public class Organization {
         isActive = active;
     }
 
-    public Set<Office> getOffices() {
-        if (offices == null) {
-            offices = new HashSet<>();
-        }
-        return offices;
-    }
-
-    public void setOffices(Set<Office> offices) {
-        this.offices = offices;
-    }
 }

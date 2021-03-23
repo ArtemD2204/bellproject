@@ -1,11 +1,8 @@
 package ru.artemdikov.bellproject.office.model;
 
 import ru.artemdikov.bellproject.organization.model.Organization;
-import ru.artemdikov.bellproject.user.model.User;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Офис
@@ -52,8 +49,8 @@ public class Office {
     /**
      * Пользователи
      */
-    @OneToMany(mappedBy = "office")
-    private Set<User> users;
+//    @OneToMany(mappedBy = "office")
+//    private Set<User> users;
 
     /**
      * Организация
@@ -106,14 +103,14 @@ public class Office {
         this.address = address;
     }
 
-    public Set<User> getUsers() {
-        if (users == null) {
-            users = new HashSet<>();
-        }
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
+//    public Set<User> getUsers() {
+//        if (users == null) {
+//            users = new HashSet<>();
+//        }
+//        return users;
+//    }
+//
+//    public void setUsers(Set<User> users) {
+//        this.users = users;
+//    }
 }

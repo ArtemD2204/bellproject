@@ -1,9 +1,7 @@
 package ru.artemdikov.bellproject.directory.model;
 
-import ru.artemdikov.bellproject.user.model.User;
 
 import javax.persistence.*;
-import java.util.Set;
 
 /**
  * Пользователь
@@ -20,22 +18,10 @@ public class Country {
     private String code;
 
     /**
-     * Служебное поле hibernate
-     */
-//    @Version
-//    private Integer version;
-
-    /**
      * Название
      */
     @Column(name = "name", length = 150, nullable = false)
     private String name;
-
-    /**
-     * Пользователи
-     */
-    @OneToMany(mappedBy = "country")
-    private Set<User> users;
 
     public String getCode() {
         return code;
