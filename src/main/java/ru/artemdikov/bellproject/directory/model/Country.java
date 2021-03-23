@@ -16,14 +16,14 @@ public class Country {
      * Код
      */
     @Id
-    @Column(name = "code")
-    private Integer code;
+    @Column(name = "code", length = 3)
+    private String code;
 
     /**
      * Служебное поле hibernate
      */
-    @Version
-    private Integer version;
+//    @Version
+//    private Integer version;
 
     /**
      * Название
@@ -36,4 +36,20 @@ public class Country {
      */
     @OneToMany(mappedBy = "country")
     private Set<User> users;
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

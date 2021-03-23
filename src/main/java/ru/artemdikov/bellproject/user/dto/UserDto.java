@@ -28,11 +28,11 @@ public class UserDto {
     @NotNull(message = "officeId cannot be null")
     private Long officeId;
 
-    private Integer docCode;
+    private String docCode;
     private String docName;
     private String docNumber;
     private String docDate;
-    private Integer citizenshipCode;
+    private String citizenshipCode;
 
     public Long getId() {
         return id;
@@ -40,6 +40,10 @@ public class UserDto {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public void setDocName(String docName) {
+        this.docName = docName;
     }
 
     public String getFirstName() {
@@ -98,11 +102,11 @@ public class UserDto {
         this.officeId = officeId;
     }
 
-    public Integer getDocCode() {
+    public String getDocCode() {
         return docCode;
     }
 
-    public void setDocCode(Integer docCode) {
+    public void setDocCode(String docCode) {
         this.docCode = docCode;
     }
 
@@ -122,11 +126,11 @@ public class UserDto {
         this.docDate = docDate;
     }
 
-    public Integer getCitizenshipCode() {
+    public String getCitizenshipCode() {
         return citizenshipCode;
     }
 
-    public void setCitizenshipCode(Integer citizenshipCode) {
+    public void setCitizenshipCode(String citizenshipCode) {
         this.citizenshipCode = citizenshipCode;
     }
 

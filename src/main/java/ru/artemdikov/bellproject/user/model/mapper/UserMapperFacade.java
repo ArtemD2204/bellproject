@@ -89,6 +89,15 @@ public class UserMapperFacade implements MapperFacade<User, UserDto> {
     }
 
     private void configure() {
-        mapperFactory.classMap(User.class, UserDto.class).customize(userCustomMapper).field("office.id", "officeId").byDefault().register();
+        mapperFactory.classMap(User.class, UserDto.class)
+//                .customize(userCustomMapper)
+                .field("office.id", "officeId")
+                .field("country.code", "citizenshipCode")
+                .field("document.documentType.code", "docCode")
+                .field("document.documentType.name", "docName")
+                .field("document.docNumber", "docNumber")
+                .field("document.docDate", "docDate")
+                .byDefault()
+                .register();
     }
 }

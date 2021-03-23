@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS Office (
     address    VARCHAR(255) NOT NULL COMMENT 'Адрес',
     phone VARCHAR(30) COMMENT 'Телефон',
     is_active BOOLEAN DEFAULT true,
-    organization_id   INTEGER   COMMENT 'Уникальный идентификатор организации'
+    organization_id   INTEGER NOT NULL   COMMENT 'Уникальный идентификатор организации'
 );
 COMMENT ON TABLE Office IS 'Офис';
 
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS User (
     phone VARCHAR(30) COMMENT 'Телефон',
     is_identified BOOLEAN DEFAULT true,
     office_id INTEGER NOT NULL COMMENT 'Офис',
-    country_code INTEGER COMMENT 'Код страны'
+    country_code CHAR(3) COMMENT 'Код страны'
 );
 COMMENT ON TABLE User IS 'Пользователь';
 
@@ -41,22 +41,22 @@ CREATE TABLE IF NOT EXISTS Document (
     version    INTEGER NOT NULL     COMMENT 'Служебное поле hibernate',
     doc_number VARCHAR(30) NOT NULL COMMENT 'Номер документа',
     doc_date   DATE NOT NULL        COMMENT 'Дата документа',
-    doc_code   INTEGER NOT NULL     COMMENT 'Тип документа'
+    doc_code   CHAR(2) NOT NULL     COMMENT 'Тип документа'
 );
 
 CREATE TABLE IF NOT EXISTS Document_Type (
-    code       INTEGER                COMMENT 'Код типа документа - Уникальный идентификатор' PRIMARY KEY ,
+    code       CHAR(2)                COMMENT 'Код типа документа - Уникальный идентификатор' PRIMARY KEY ,
     name       VARCHAR(150) NOT NULL  COMMENT 'Название типа документа'
 );
 
 CREATE TABLE IF NOT EXISTS Country (
-    code       INTEGER                COMMENT 'Код страны - Уникальный идентификатор' PRIMARY KEY ,
+    code       CHAR(3)                COMMENT 'Код страны - Уникальный идентификатор' PRIMARY KEY ,
     name       VARCHAR(150) NOT NULL  COMMENT 'Название страны'
 );
 
 -- Organization indexes and foreign keys
 CREATE INDEX IX_Organization_Name ON Organization (name);
-CREATE UNIQUE INDEX UX_Organization_INN ON Organization (inn);
+CREATE INDEX IX_Organization_INN ON Organization (inn);
 CREATE INDEX IX_Organization_Is_Active ON Organization (is_active);
 
 -- Office indexes and foreign keys

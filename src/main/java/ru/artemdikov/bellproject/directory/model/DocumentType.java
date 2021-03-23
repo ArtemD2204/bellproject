@@ -16,14 +16,14 @@ public class DocumentType {
      * Код
      */
     @Id
-    @Column(name = "code")
-    private Integer code;
+    @Column(name = "code", length = 2)
+    private String code;
 
     /**
      * Служебное поле hibernate
      */
-    @Version
-    private Integer version;
+//    @Version
+//    private Integer version;
 
     /**
      * Название
@@ -37,11 +37,11 @@ public class DocumentType {
     @OneToMany(mappedBy = "documentType")
     private Set<Document> documents;
 
-    public Integer getCode() {
+    public String getCode() {
         return code;
     }
 
-    public void setCode(Integer code) {
+    public void setCode(String code) {
         this.code = code;
     }
 
