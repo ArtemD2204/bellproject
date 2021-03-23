@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS Office (
     name                VARCHAR(150) NOT NULL   COMMENT 'Название',
     address             VARCHAR(255) NOT NULL   COMMENT 'Адрес',
     phone               VARCHAR(30)             COMMENT 'Телефон',
-    is_active           BOOLEAN DEFAULT true   COMMENT 'Просто boolean',
+    is_active           BOOLEAN DEFAULT true    COMMENT 'Просто boolean',
     organization_id     INTEGER NOT NULL        COMMENT 'Уникальный идентификатор организации'
 );
 COMMENT ON TABLE Office IS 'Офис';

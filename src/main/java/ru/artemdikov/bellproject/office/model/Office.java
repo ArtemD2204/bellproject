@@ -47,16 +47,10 @@ public class Office {
     private Boolean isActive;
 
     /**
-     * Пользователи
-     */
-//    @OneToMany(mappedBy = "office")
-//    private Set<User> users;
-
-    /**
      * Организация
      */
-    @ManyToOne
-    @JoinColumn(name = "organization_id", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "organization_id", referencedColumnName = "id", nullable = false)
     private Organization organization;
 
     public Long getId() {
@@ -103,14 +97,4 @@ public class Office {
         this.address = address;
     }
 
-//    public Set<User> getUsers() {
-//        if (users == null) {
-//            users = new HashSet<>();
-//        }
-//        return users;
-//    }
-//
-//    public void setUsers(Set<User> users) {
-//        this.users = users;
-//    }
 }

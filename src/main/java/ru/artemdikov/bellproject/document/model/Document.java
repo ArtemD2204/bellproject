@@ -12,8 +12,8 @@ import java.util.Date;
 @Entity
 @Table(name = "Document")
 public class Document {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
     private Long id;
 
@@ -39,15 +39,16 @@ public class Document {
     /**
      * Тип документа
      */
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "doc_code", referencedColumnName = "code")
     private DocumentType documentType;
 
     /**
      * Пользователь
      */
-    @OneToOne
-    @JoinColumn(name = "id", referencedColumnName = "id")
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id", referencedColumnName = "id", nullable = false)
+    @MapsId
     private User user;
 
     public Long getId() {

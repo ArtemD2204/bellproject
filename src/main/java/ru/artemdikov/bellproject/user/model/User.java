@@ -63,20 +63,20 @@ public class User {
     /**
      * Офис
      */
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "office_id", referencedColumnName = "id", nullable = false)
     private Office office;
 
     /**
      * Документ
      */
-    @OneToOne(mappedBy = "user")
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
     private Document document;
 
     /**
      * Гражданство
      */
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "country_code", referencedColumnName = "code")
     private Country country;
 
