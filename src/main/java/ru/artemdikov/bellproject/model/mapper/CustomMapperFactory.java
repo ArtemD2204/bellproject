@@ -5,6 +5,8 @@ import ma.glasnost.orika.impl.DefaultMapperFactory;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
+
 /**
  * Фабрика для создания MapperFactory.
  * При необходимости можно добавить кастомные мапперы

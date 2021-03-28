@@ -37,7 +37,7 @@ public class Office {
     /**
      * Телефон
      */
-    @Column(name = "phone", length = 30, nullable = false)
+    @Column(name = "phone", length = 30)
     private String phone;
 
     /**

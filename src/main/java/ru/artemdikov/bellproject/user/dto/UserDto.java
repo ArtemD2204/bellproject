@@ -28,10 +28,17 @@ public class UserDto {
     @NotNull(message = "officeId cannot be null")
     private Long officeId;
 
+    @NotNull(message = "docCode cannot be null")
     private String docCode;
+
     private String docName;
+
+    @NotNull(message = "docNumber cannot be null")
     private String docNumber;
+
+    @NotNull(message = "docDate cannot be null")
     private String docDate;
+
     private String citizenshipCode;
 
     public Long getId() {
@@ -136,24 +143,5 @@ public class UserDto {
 
     public String getDocName() {
         return docName;
-    }
-
-    @Override
-    public String toString() {
-        return "UserDto{" +
-                "id='" + id + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", secondName='" + secondName + '\'' +
-                ", middleName='" + middleName + '\'' +
-                ", position='" + position + '\'' +
-                ", phone='" + phone + '\'' +
-                ", isIdentified=" + isIdentified +
-                ", officeId=" + officeId +
-                ", docCode=" + docCode +
-                ", docName='" + docName + '\'' +
-                ", docNumber='" + docNumber + '\'' +
-                ", docDate='" + docDate + '\'' +
-                ", citizenshipCode=" + citizenshipCode +
-                '}';
     }
 }

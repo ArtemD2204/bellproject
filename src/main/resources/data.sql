@@ -17,9 +17,11 @@ INSERT INTO Office (id, version, name, address, phone, organization_id) VALUES (
 INSERT INTO Office (id, version, name, address, phone, is_active, organization_id) VALUES (6, 0, 'Oracle office', 'ул.Кирова, 20', '8-985-4568', FALSE, 4);
 
 INSERT INTO Country (code, name) VALUES ('010', 'Антарктида');
+INSERT INTO Country (code, name) VALUES ('060', 'БЕРМУДЫ');
 INSERT INTO Country (code, name) VALUES ('643', 'Российская Федерация');
 INSERT INTO Country (code, name) VALUES ('646', 'Руандийская Республика');
 
+INSERT INTO Document_Type (code, name) VALUES ('03', 'Свидетельство о рождении');
 INSERT INTO Document_Type (code, name) VALUES ('07', 'Военный билет');
 INSERT INTO Document_Type (code, name) VALUES ('21', 'Паспорт гражданина РФ');
 

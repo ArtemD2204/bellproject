@@ -3,6 +3,7 @@ package ru.artemdikov.bellproject.user.dao;
 import ru.artemdikov.bellproject.user.model.User;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * DAO для работы с User
@@ -24,17 +25,24 @@ public interface UserDao {
     User loadById(Long id);
 
     /**
-     * Получить User по имени
+     * Получить отфильтрованный список объектов User
      *
-     * @param name
+     * @param filters
      * @return
      */
-    User loadByName(String name);
+    List<User> loadByFilter(Map<String, String> filters);
 
     /**
      * Сохранить User
      *
-     * @param User
+     * @param user
      */
-    void save(User User);
+    void save(User user);
+
+    /**
+     * Обновить User
+     *
+     * @param user
+     */
+    public void update(User user);
 }

@@ -1,6 +1,6 @@
 package ru.artemdikov.bellproject.document.model;
 
-import ru.artemdikov.bellproject.directory.model.DocumentType;
+import ru.artemdikov.bellproject.catalog.doc.model.DocumentType;
 import ru.artemdikov.bellproject.user.model.User;
 
 import javax.persistence.*;
@@ -40,7 +40,7 @@ public class Document {
      * Тип документа
      */
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "doc_code", referencedColumnName = "code")
+    @JoinColumn(name = "doc_code", referencedColumnName = "code", nullable = false)
     private DocumentType documentType;
 
     /**
@@ -53,6 +53,10 @@ public class Document {
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getDocNumber() {
@@ -85,5 +89,17 @@ public class Document {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    @Override
+    public String toString() {
+        return "Document{" +
+                "id=" + id +
+                ", version=" + version +
+                ", docNumber='" + docNumber + '\'' +
+                ", docDate=" + docDate +
+                ", documentType=" + documentType +
+                ", user=" + user +
+                '}';
     }
 }

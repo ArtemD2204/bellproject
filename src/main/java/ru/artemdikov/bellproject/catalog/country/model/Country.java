@@ -1,18 +1,20 @@
-package ru.artemdikov.bellproject.directory.model;
+package ru.artemdikov.bellproject.catalog.country.model;
+
 
 import javax.persistence.*;
 
 /**
- * Вид документа
+ * Пользователь
  */
 @Entity
-@Table(name = "Document_Type")
-public class DocumentType {
+@Table(name = "Country")
+public class Country {
+
     /**
      * Код
      */
     @Id
-    @Column(name = "code", length = 2)
+    @Column(name = "code", length = 3)
     private String code;
 
     /**
@@ -36,5 +38,4 @@ public class DocumentType {
     public void setName(String name) {
         this.name = name;
     }
-
 }

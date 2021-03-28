@@ -13,16 +13,30 @@ import java.util.List;
 public interface UserService {
 
     /**
-     * Добавить нового пользователя в БД
+     * Получить список всех пользователей
+     *
+     * @return {@List<UserDto>}
+     */
+    List<UserDto> allUsers();
+
+    /**
+     * Получить User по id
+     *
+     * @return {UserDto}
+     */
+    UserDto getById(Long id);
+
+    /**
+     * Добавить нового пользователя User в БД
      *
      * @param userDto
      */
     void add(@Valid UserDto userDto);
 
     /**
-     * Получить список пользователей
+     * Обновить пользователя User в БД
      *
-     * @return {@User}
+     * @param userDto
      */
-    List<UserDto> users();
+    void update(UserDto userDto);
 }

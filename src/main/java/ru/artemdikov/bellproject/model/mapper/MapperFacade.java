@@ -1,29 +1,22 @@
 package ru.artemdikov.bellproject.model.mapper;
 
-import ma.glasnost.orika.CustomMapper;
-
 import java.util.List;
 
 /**
  * Фасад для преобразования между можелями БД и фронта
- *
- * @param <M> тип model объекта
- * @param <D> тип dto объекта
  */
-public interface MapperFacade<M, D> {
+public interface MapperFacade {
 
     /**
      * Преобразование sourceObject в экземпляр класса destinationClass
      *
      * @param sourceObject     исходный объект
      * @param destinationClass класс, в который надо преобразовать объект
-     * @param <M>              тип исходного объекта
+     * @param <S>              тип исходного объекта
      * @param <D>              тип объекта, к который надо преобразовать исходный объект
      * @return экземпляр класса D с данными из sourceObject
      */
-    D toDto(M model);
-
-    M toModel(D dto);
+    <S, D> D map(S sourceObject, Class<D> destinationClass);
 
     /**
      * Запись занных из sourceObject в destinationObject
@@ -33,9 +26,7 @@ public interface MapperFacade<M, D> {
      * @param <S>
      * @param <D>
      */
-    void toDto(M model, D dto);
-
-    void toModel(D dto, M model);
+    <S, D> void map(S sourceObject, D destinationObject);
 
     /**
      * Преобразование коллекции оъектов
@@ -46,7 +37,5 @@ public interface MapperFacade<M, D> {
      * @param <D>
      * @return
      */
-    List<D> mapAsListToDto(Iterable<M> source);
-
-    List<M> mapAsListToModel(Iterable<D> source);
+    <S, D> List<D> mapAsList(Iterable<S> source, Class<D> destinationClass);
 }

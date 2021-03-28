@@ -10,7 +10,7 @@ import java.util.List;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
-@RequestMapping(value = "/", produces = APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/api/user", produces = APPLICATION_JSON_VALUE)
 public class UserController {
 
     private final UserService userService;
@@ -20,13 +20,23 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("/user")
-    public void user(@RequestBody UserDto user) {
+    @PostMapping("/save")
+    public void saveUser(@RequestBody UserDto user) {
         userService.add(user);
     }
 
-    @GetMapping("/user")
-    public List<UserDto> users() {
-        return userService.users();
+    @PostMapping("/update")
+    public void updateUser(@RequestBody UserDto user) {
+        userService.update(user);
+    }
+
+    @GetMapping("/all")
+    public List<UserDto> allUsers() {
+        return userService.allUsers();
+    }
+
+    @GetMapping("/{id}")
+    public UserDto user(@PathVariable Long id) {
+        return userService.getById(id);
     }
 }
