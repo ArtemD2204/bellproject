@@ -28,15 +28,15 @@ public class UserDto {
     @NotNull(message = "officeId cannot be null")
     private Long officeId;
 
-    @NotNull(message = "docCode cannot be null")
+    @NotEmpty(message = "docCode cannot be null")
     private String docCode;
 
     private String docName;
 
-    @NotNull(message = "docNumber cannot be null")
+    @NotEmpty(message = "docNumber cannot be null")
     private String docNumber;
 
-    @NotNull(message = "docDate cannot be null")
+    @NotEmpty(message = "docDate cannot be null")
     private String docDate;
 
     private String citizenshipCode;

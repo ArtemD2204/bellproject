@@ -46,7 +46,7 @@ public class UserDaoImpl implements UserDao {
      * {@inheritDoc}
      */
     @Override
-    public List<User> loadByFilter(Map<String, String> filters) {
+    public List<User> loadByFilter(Map<String, Object> filters) {
         CriteriaQuery<User> criteriaQuery = buildCriteria(filters);
         TypedQuery<User> query = em.createQuery(criteriaQuery);
         return query.getResultList();
@@ -68,28 +68,28 @@ public class UserDaoImpl implements UserDao {
         em.merge(user);
     }
 
-    private CriteriaQuery<User> buildCriteria(Map<String, String> filters) {
+    private CriteriaQuery<User> buildCriteria(Map<String, Object> filters) {
         CriteriaBuilder builder = em.getCriteriaBuilder();
         CriteriaQuery<User> criteria = builder.createQuery(User.class);
         Root<User> user = criteria.from(User.class);
-        Predicate[] predicates = new Predicate[filters.size()];
-        int index = 0;
-        for(Map.Entry<String, String> entry : filters.entrySet()) {
-            String value = entry.getValue();
+        List<Predicate> predicateList = new ArrayList<>();
+        for(Map.Entry<String, Object> entry : filters.entrySet()) {
             String key = entry.getKey();
-            if (value != null) {
+            Object value = entry.getValue();
+            if (value != null && (value.getClass() != String.class || !((String)value).isEmpty())) {
                 if ("officeId".equals(key)) {
-                    predicates[index++] = builder.equal(user.get("office").get("id"), value);
+                    predicateList.add(builder.equal(user.get("office").get("id"), value));
                 } else if ("docCode".equals(key)) {
-                    predicates[index++] = builder.equal(user.get("document").get("documentType").get("code"), value);
+                    predicateList.add(builder.equal(user.get("document").get("documentType").get("code"), value));
                 } else if ("citizenshipCode".equals(key)) {
-                    predicates[index++] = builder.equal(user.get("country").get("code"), value);
+                    predicateList.add(builder.equal(user.get("country").get("code"), value));
                 } else {
-                    predicates[index++] = builder.equal(user.get(key), value);
+                    predicateList.add(builder.equal(user.get(key), value));
                 }
             }
         }
-        criteria = criteria.where(predicates);
+        Predicate[] predicates = new Predicate[0];
+        criteria = criteria.where(predicateList.toArray(predicates));
         return criteria;
     }
 }

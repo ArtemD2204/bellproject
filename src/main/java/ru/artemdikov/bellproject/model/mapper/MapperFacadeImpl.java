@@ -7,7 +7,6 @@ import ma.glasnost.orika.metadata.Type;
 import ma.glasnost.orika.metadata.TypeFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import ru.artemdikov.bellproject.catalog.country.repository.CountryRepository;
 import ru.artemdikov.bellproject.catalog.doc.repository.DocTypeRepository;
 import ru.artemdikov.bellproject.document.model.Document;

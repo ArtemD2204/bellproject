@@ -30,7 +30,7 @@ public interface UserDao {
      * @param filters
      * @return
      */
-    List<User> loadByFilter(Map<String, String> filters);
+    List<User> loadByFilter(Map<String, Object> filters);
 
     /**
      * Сохранить User

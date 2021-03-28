@@ -10,12 +10,14 @@ import ru.artemdikov.bellproject.model.mapper.MapperFacade;
 import ru.artemdikov.bellproject.office.dao.OfficeDao;
 import ru.artemdikov.bellproject.user.dao.UserDao;
 import ru.artemdikov.bellproject.user.dto.UserDto;
+import ru.artemdikov.bellproject.user.dto.UserDtoShort;
 import ru.artemdikov.bellproject.user.model.User;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Map;
 
 /**
  * {@inheritDoc}
@@ -47,6 +49,16 @@ public class UserServiceImpl implements UserService {
     public List<UserDto> allUsers() {
         List<User> all = dao.all();
         return mapperFacade.mapAsList(all, UserDto.class);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public List<UserDtoShort> filteredUserList(Map<String, Object> filters) {
+        List<User> userList = dao.loadByFilter(filters);
+        return mapperFacade.mapAsList(userList, UserDtoShort.class);
     }
 
     /**
