@@ -1,14 +1,17 @@
 package ru.artemdikov.bellproject.user.dto;
 
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class UserDtoShort {
+    @Min(value = 1, message = "id should not be less than 1")
+    @NotNull
     private Long id;
 
     @Size(max = 50)
-    @NotEmpty(message = "firstName cannot be null")
+    @NotEmpty(message = "firstName cannot be empty")
     private String firstName;
 
     @Size(max = 50)
@@ -18,7 +21,7 @@ public class UserDtoShort {
     private String middleName;
 
     @Size(max = 100)
-    @NotEmpty(message = "position cannot be null")
+    @NotEmpty(message = "position cannot be empty")
     private String position;
 
     public Long getId() {

@@ -3,10 +3,10 @@ package ru.artemdikov.bellproject.user.service;
 import org.springframework.validation.annotation.Validated;
 import ru.artemdikov.bellproject.user.dto.UserDto;
 import ru.artemdikov.bellproject.user.dto.UserDtoShort;
+import ru.artemdikov.bellproject.user.dto.UserFilter;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Сервис
@@ -26,7 +26,7 @@ public interface UserService {
      *
      * @return {@List<UserDtoShort>}
      */
-    List<UserDtoShort> filteredUserList(Map<String, Object> filters);
+    List<UserDtoShort> filteredUserList(@Valid UserFilter userFilter);
 
     /**
      * Получить User по id
@@ -47,5 +47,5 @@ public interface UserService {
      *
      * @param userDto
      */
-    void update(UserDto userDto);
+    void update(@Valid UserDto userDto);
 }

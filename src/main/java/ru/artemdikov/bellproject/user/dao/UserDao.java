@@ -1,5 +1,6 @@
 package ru.artemdikov.bellproject.user.dao;
 
+import ru.artemdikov.bellproject.user.dto.UserFilter;
 import ru.artemdikov.bellproject.user.model.User;
 
 import java.util.List;
@@ -27,10 +28,10 @@ public interface UserDao {
     /**
      * Получить отфильтрованный список объектов User
      *
-     * @param filters
+     * @param userFilter
      * @return
      */
-    List<User> loadByFilter(Map<String, Object> filters);
+    List<User> loadByFilter(UserFilter userFilter);
 
     /**
      * Сохранить User

@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS User (
     position        VARCHAR(100) NOT NULL   COMMENT 'Должность',
     phone           VARCHAR(30)             COMMENT 'Телефон',
     is_identified   BOOLEAN DEFAULT true    COMMENT 'Просто boolean',
-    office_id       INTEGER        COMMENT 'Офис',
+    office_id       INTEGER NOT NULL       COMMENT 'Офис',
     country_code    CHAR(3)                 COMMENT 'Код страны'
 );
 COMMENT ON TABLE User IS 'Пользователь';

@@ -11,13 +11,13 @@ import ru.artemdikov.bellproject.office.dao.OfficeDao;
 import ru.artemdikov.bellproject.user.dao.UserDao;
 import ru.artemdikov.bellproject.user.dto.UserDto;
 import ru.artemdikov.bellproject.user.dto.UserDtoShort;
+import ru.artemdikov.bellproject.user.dto.UserFilter;
 import ru.artemdikov.bellproject.user.model.User;
 
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.Map;
 
 /**
  * {@inheritDoc}
@@ -56,8 +56,8 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     @Transactional(readOnly = true)
-    public List<UserDtoShort> filteredUserList(Map<String, Object> filters) {
-        List<User> userList = dao.loadByFilter(filters);
+    public List<UserDtoShort> filteredUserList(UserFilter userFilter) {
+        List<User> userList = dao.loadByFilter(userFilter);
         return mapperFacade.mapAsList(userList, UserDtoShort.class);
     }
 
@@ -107,14 +107,19 @@ public class UserServiceImpl implements UserService {
         } else {
             user.setCountry(null);
         }
-        Document document;
-        if (user.getId() == null) { // если новый user
-            document = new Document();
-        } else {
-            document = user.getDocument();
+        if (userDto.getDocCode() != null && userDto.getDocNumber() != null && userDto.getDocDate() != null){
+            Document document;
+            if (user.getId() == null) { // если новый user
+                document = new Document();
+            } else {
+                document = user.getDocument();
+                if (document == null) {
+                    document = new Document();
+                }
+            }
+            updateDocument(document, userDto.getDocCode(), userDto.getDocNumber(), userDto.getDocDate());
+            user.addDocument(document);
         }
-        updateDocument(document, userDto.getDocCode(), userDto.getDocNumber(), userDto.getDocDate());
-        user.addDocument(document);
     }
 
     private void updateDocument(Document document, String docCode, String docNumber, String docDate) {
@@ -127,5 +132,4 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException("userDto.docDate to user.document.docDate mapping error", e);
         }
     }
-
 }

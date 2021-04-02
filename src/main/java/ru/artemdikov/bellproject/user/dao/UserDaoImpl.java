@@ -2,6 +2,8 @@ package ru.artemdikov.bellproject.user.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import ru.artemdikov.bellproject.user.dto.UserFilter;
+import ru.artemdikov.bellproject.exception.EntityNotFoundException;
 import ru.artemdikov.bellproject.user.model.User;
 
 import javax.persistence.EntityManager;
@@ -31,7 +33,11 @@ public class UserDaoImpl implements UserDao {
                 "SELECT u FROM User u join fetch u.document d join fetch d.documentType",
                 User.class
         );
-        return query.getResultList();
+        List<User> users = query.getResultList();
+        if (users.size() == 0) {
+            throw new EntityNotFoundException("No users in database.");
+        }
+        return users;
     }
 
     /**
@@ -39,17 +45,25 @@ public class UserDaoImpl implements UserDao {
      */
     @Override
     public User loadById(Long id) {
-        return em.find(User.class, id);
+        User user = em.find(User.class, id);
+        if (user == null) {
+            throw new EntityNotFoundException("User not found for id=" + id + ".");
+        }
+        return user;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public List<User> loadByFilter(Map<String, Object> filters) {
-        CriteriaQuery<User> criteriaQuery = buildCriteria(filters);
+    public List<User> loadByFilter(UserFilter userFilter) {
+        CriteriaQuery<User> criteriaQuery = buildCriteria(userFilter);
         TypedQuery<User> query = em.createQuery(criteriaQuery);
-        return query.getResultList();
+        List<User> users = query.getResultList();
+        if (users.size() == 0) {
+            throw new EntityNotFoundException("No users were found. Please, change filters parameters.");
+        }
+        return users;
     }
 
     /**
@@ -68,25 +82,35 @@ public class UserDaoImpl implements UserDao {
         em.merge(user);
     }
 
-    private CriteriaQuery<User> buildCriteria(Map<String, Object> filters) {
+    private CriteriaQuery<User> buildCriteria(UserFilter userFilter) {
         CriteriaBuilder builder = em.getCriteriaBuilder();
         CriteriaQuery<User> criteria = builder.createQuery(User.class);
         Root<User> user = criteria.from(User.class);
         List<Predicate> predicateList = new ArrayList<>();
-        for(Map.Entry<String, Object> entry : filters.entrySet()) {
-            String key = entry.getKey();
-            Object value = entry.getValue();
-            if (value != null && (value.getClass() != String.class || !((String)value).isEmpty())) {
-                if ("officeId".equals(key)) {
-                    predicateList.add(builder.equal(user.get("office").get("id"), value));
-                } else if ("docCode".equals(key)) {
-                    predicateList.add(builder.equal(user.get("document").get("documentType").get("code"), value));
-                } else if ("citizenshipCode".equals(key)) {
-                    predicateList.add(builder.equal(user.get("country").get("code"), value));
-                } else {
-                    predicateList.add(builder.equal(user.get(key), value));
-                }
-            }
+        predicateList.add(builder.equal(user.get("office").get("id"), userFilter.getOfficeId()));
+        String firstName = userFilter.getFirstName();
+        if (firstName != null && !firstName.isEmpty()) {
+            predicateList.add(builder.equal(user.get("firstName"), firstName));
+        }
+        String secondName = userFilter.getSecondName();
+        if (secondName != null && !secondName.isEmpty()) {
+            predicateList.add(builder.equal(user.get("secondName"), secondName));
+        }
+        String middleName = userFilter.getMiddleName();
+        if (middleName != null && !middleName.isEmpty()) {
+            predicateList.add(builder.equal(user.get("middleName"), middleName));
+        }
+        String position = userFilter.getPosition();
+        if (position != null && !position.isEmpty()) {
+            predicateList.add(builder.equal(user.get("position"), position));
+        }
+        String docCode = userFilter.getDocCode();
+        if (docCode != null && !docCode.isEmpty()) {
+            predicateList.add(builder.equal(user.get("document").get("documentType").get("code"), docCode));
+        }
+        String citizenshipCode = userFilter.getCitizenshipCode();
+        if (citizenshipCode != null && !citizenshipCode.isEmpty()) {
+            predicateList.add(builder.equal(user.get("country").get("code"), citizenshipCode));
         }
         Predicate[] predicates = new Predicate[0];
         criteria = criteria.where(predicateList.toArray(predicates));

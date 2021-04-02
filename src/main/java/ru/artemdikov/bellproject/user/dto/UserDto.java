@@ -3,11 +3,11 @@ package ru.artemdikov.bellproject.user.dto;
 import javax.validation.constraints.*;
 
 public class UserDto {
-//    @NotEmpty     ???
+
     private Long id;
 
     @Size(max = 50)
-    @NotEmpty(message = "firstName cannot be null")
+    @NotEmpty(message = "firstName cannot be empty")
     private String firstName;
 
     @Size(max = 50)
@@ -17,7 +17,7 @@ public class UserDto {
     private String middleName;
 
     @Size(max = 100)
-    @NotEmpty(message = "position cannot be null")
+    @NotEmpty(message = "position cannot be empty")
     private String position;
 
     @Size(max = 30)
@@ -25,18 +25,16 @@ public class UserDto {
 
     private Boolean isIdentified;
 
+    @Min(value = 1, message = "officeId should not be less than 1")
     @NotNull(message = "officeId cannot be null")
     private Long officeId;
 
-    @NotEmpty(message = "docCode cannot be null")
     private String docCode;
 
     private String docName;
 
-    @NotEmpty(message = "docNumber cannot be null")
     private String docNumber;
 
-    @NotEmpty(message = "docDate cannot be null")
     private String docDate;
 
     private String citizenshipCode;

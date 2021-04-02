@@ -3,7 +3,6 @@ package ru.artemdikov.bellproject.office.dao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.artemdikov.bellproject.office.model.Office;
-import ru.artemdikov.bellproject.user.model.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
