@@ -25,8 +25,6 @@ public class CountryServiceImpl implements CountryService {
         this.mapperFacade = mapperFacade;
     }
 
-
-
     /**
      * {@inheritDoc}
      */
@@ -36,13 +34,4 @@ public class CountryServiceImpl implements CountryService {
         List<Country> all = countryRepository.findAll();
         return mapperFacade.mapAsList(all, CountryDto.class);
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public Country getModelById(String code) {
-        return countryRepository.findByCode(code);
-    }
-
 }

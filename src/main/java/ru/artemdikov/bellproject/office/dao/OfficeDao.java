@@ -1,5 +1,6 @@
 package ru.artemdikov.bellproject.office.dao;
 
+import ru.artemdikov.bellproject.office.dto.OfficeFilter;
 import ru.artemdikov.bellproject.office.model.Office;
 import ru.artemdikov.bellproject.user.model.User;
 
@@ -44,10 +45,10 @@ public interface OfficeDao {
     /**
      * Получить отфильтрованный список объектов Office
      *
-     * @param filters
+     * @param officeFilter
      * @return
      */
-    List<Office> loadByFilter(Map<String, String> filters);
+    List<Office> loadByFilter(OfficeFilter officeFilter);
 
     /**
      * Сохранить Office

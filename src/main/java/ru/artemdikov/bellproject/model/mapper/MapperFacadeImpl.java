@@ -1,8 +1,6 @@
 package ru.artemdikov.bellproject.model.mapper;
 
 import ma.glasnost.orika.MapperFactory;
-import ma.glasnost.orika.metadata.Type;
-import ma.glasnost.orika.metadata.TypeFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.artemdikov.bellproject.user.dto.UserDto;
@@ -53,7 +51,6 @@ public class MapperFacadeImpl implements MapperFacade {
     }
 
     private void registerUser() {
-        Type<User> userType = TypeFactory.valueOf(User.class);
         mapperFactory.classMap(User.class, UserDto.class)
                 .field("office.id", "officeId")
                 .field("country.code", "citizenshipCode")

@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS Office (
 COMMENT ON TABLE Office IS 'Офис';
 
 CREATE TABLE IF NOT EXISTS User (
-    id              INTEGER                 COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT ,
+    id              INTEGER                 COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT,
     version         INTEGER NOT NULL        COMMENT 'Служебное поле hibernate',
     first_name      VARCHAR(50) NOT NULL    COMMENT 'Имя',
     second_name     VARCHAR(50)             COMMENT 'Фамилия',
@@ -68,6 +68,8 @@ CREATE INDEX IX_Office_Phone ON Office (phone);
 CREATE INDEX IX_Office_Is_Active ON Office (is_active);
 
 -- User indexes and foreign keys
+-- ALTER TABLE User ADD FOREIGN KEY (id) REFERENCES Document(id);
+
 CREATE INDEX IX_User_Office_Id ON User (office_id);
 ALTER TABLE User ADD FOREIGN KEY (office_id) REFERENCES Office(id);
 
