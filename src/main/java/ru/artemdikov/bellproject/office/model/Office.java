@@ -31,7 +31,7 @@ public class Office {
     /**
      * Адрес
      */
-    @Column(name = "address", length = 255, nullable = false)
+    @Column(name = "address", nullable = false)
     private String address;
 
     /**

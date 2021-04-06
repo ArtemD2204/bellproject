@@ -3,11 +3,14 @@ package ru.artemdikov.bellproject.user.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.artemdikov.bellproject.catalog.country.model.Country;
 import ru.artemdikov.bellproject.catalog.country.repository.CountryRepository;
 import ru.artemdikov.bellproject.catalog.doc.repository.DocTypeRepository;
 import ru.artemdikov.bellproject.document.model.Document;
+import ru.artemdikov.bellproject.exception.EntityNotFoundException;
 import ru.artemdikov.bellproject.model.mapper.MapperFacade;
 import ru.artemdikov.bellproject.office.dao.OfficeDao;
+import ru.artemdikov.bellproject.office.model.Office;
 import ru.artemdikov.bellproject.user.dao.UserDao;
 import ru.artemdikov.bellproject.user.dto.UserDto;
 import ru.artemdikov.bellproject.user.dto.UserDtoShort;
@@ -18,6 +21,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 /**
  * {@inheritDoc}
@@ -94,20 +98,36 @@ public class UserServiceImpl implements UserService {
     }
 
     private void mapDtoToModel(UserDto userDto, User user) {
-        user.setFirstName(userDto.getFirstName());
-        user.setSecondName(userDto.getSecondName());
-        user.setMiddleName(userDto.getMiddleName());
-        user.setPhone(userDto.getPhone());
-        user.setPosition(userDto.getPosition());
-        user.setIdentified(userDto.getIdentified());
-        user.setOffice(officeDao.loadProxyById(userDto.getOfficeId()));
-        String citizenshipCode = userDto.getCitizenshipCode();
-        if (citizenshipCode != null) {
-            user.setCountry(countryRepository.getOne(citizenshipCode));
-        } else {
-            user.setCountry(null);
+        if (userDto.getFirstName() != null) {
+            user.setFirstName(userDto.getFirstName());
         }
-        if (userDto.getDocCode() != null && userDto.getDocNumber() != null && userDto.getDocDate() != null){
+        if (userDto.getSecondName() != null) {
+            user.setSecondName(userDto.getSecondName());
+        }
+        if (userDto.getMiddleName() != null) {
+            user.setMiddleName(userDto.getMiddleName());
+        }
+        if (userDto.getPhone() != null) {
+            user.setPhone(userDto.getPhone());
+        }
+        if (userDto.getPosition() != null) {
+            user.setPosition(userDto.getPosition());
+        }
+        if (userDto.getIdentified() != null) {
+            user.setIdentified(userDto.getIdentified());
+        }
+        if (userDto.getOfficeId() != null) {
+            user.setOffice(officeDao.loadById(userDto.getOfficeId()));
+        }
+        if (userDto.getCitizenshipCode() != null) {
+            Country country = countryRepository.findById(userDto.getCitizenshipCode()).orElse(null);
+            if (country == null) {
+                throw new EntityNotFoundException("Country not found for citizenshipCode="
+                        + userDto.getCitizenshipCode() + ".");
+            }
+            user.setCountry(country);
+        }
+        if (userDto.getDocCode() != null || userDto.getDocName() != null || userDto.getDocNumber() != null || userDto.getDocDate() != null){
             Document document;
             if (user.getId() == null) { // если новый user
                 document = new Document();
@@ -117,12 +137,12 @@ public class UserServiceImpl implements UserService {
                     document = new Document();
                 }
             }
-            updateDocument(document, userDto.getDocCode(), userDto.getDocNumber(), userDto.getDocDate());
+            updateDocument(document, userDto);
             user.addDocument(document);
         }
     }
 
-    private void updateDocument(Document document, String docCode, String docNumber, String docDate) {
+    private void updateDocument(Document document, UserDto userDto) {
         document.setDocumentType(docTypeRepository.getOne(docCode));
         document.setDocNumber(docNumber);
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");

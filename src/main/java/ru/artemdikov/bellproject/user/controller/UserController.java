@@ -7,7 +7,6 @@ import ru.artemdikov.bellproject.user.dto.UserDtoShort;
 import ru.artemdikov.bellproject.user.dto.UserFilter;
 import ru.artemdikov.bellproject.user.service.UserService;
 
-import javax.validation.Valid;
 import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;

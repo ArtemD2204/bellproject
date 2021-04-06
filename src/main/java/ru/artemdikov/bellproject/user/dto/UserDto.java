@@ -1,34 +1,42 @@
 package ru.artemdikov.bellproject.user.dto;
 
+import ru.artemdikov.bellproject.validation.group.Default;
+import ru.artemdikov.bellproject.validation.group.OnCreate;
+import ru.artemdikov.bellproject.validation.group.OnUpdate;
+
 import javax.validation.constraints.*;
 
 public class UserDto {
 
+    @Null(groups = OnCreate.class)
+    @Min(value = 1, message = "id should not be less than 1", groups = OnUpdate.class)
+    @NotNull(groups = OnUpdate.class)
     private Long id;
 
-    @Size(max = 50)
-    @NotEmpty(message = "firstName cannot be empty")
+    @Size(max = 50, groups = Default.class)
+    @NotEmpty(message = "firstName cannot be empty", groups = Default.class)
     private String firstName;
 
-    @Size(max = 50)
+    @Size(max = 50, groups = Default.class)
     private String secondName;
 
-    @Size(max = 50)
+    @Size(max = 50, groups = Default.class)
     private String middleName;
 
-    @Size(max = 100)
-    @NotEmpty(message = "position cannot be empty")
+    @Size(max = 100, groups = Default.class)
+    @NotEmpty(message = "position cannot be empty", groups = Default.class)
     private String position;
 
-    @Size(max = 30)
+    @Size(max = 30, groups = Default.class)
     private String phone;
 
     private Boolean isIdentified;
 
-    @Min(value = 1, message = "officeId should not be less than 1")
-    @NotNull(message = "officeId cannot be null")
+    @Min(value = 1, message = "officeId should not be less than 1", groups = Default.class)
+    @NotNull(groups = OnCreate.class)
     private Long officeId;
 
+    @Size(min = 2, max = 2, groups = Default.class)
     private String docCode;
 
     private String docName;
@@ -37,6 +45,7 @@ public class UserDto {
 
     private String docDate;
 
+    @Size(min = 3, max = 3, groups = Default.class)
     private String citizenshipCode;
 
     public Long getId() {

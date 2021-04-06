@@ -2,10 +2,8 @@ package ru.artemdikov.bellproject.office.dao;
 
 import ru.artemdikov.bellproject.office.dto.OfficeFilter;
 import ru.artemdikov.bellproject.office.model.Office;
-import ru.artemdikov.bellproject.user.model.User;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * DAO для работы с Office
@@ -35,18 +33,10 @@ public interface OfficeDao {
     Office loadProxyById(Long id);
 
     /**
-     * Получить Office по имени
-     *
-     * @param name
-     * @return
-     */
-//    Office loadByName(String name);
-
-    /**
      * Получить отфильтрованный список объектов Office
      *
      * @param officeFilter
-     * @return
+     * @return List<Office>
      */
     List<Office> loadByFilter(OfficeFilter officeFilter);
 

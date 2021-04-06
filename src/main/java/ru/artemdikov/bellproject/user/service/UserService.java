@@ -4,6 +4,9 @@ import org.springframework.validation.annotation.Validated;
 import ru.artemdikov.bellproject.user.dto.UserDto;
 import ru.artemdikov.bellproject.user.dto.UserDtoShort;
 import ru.artemdikov.bellproject.user.dto.UserFilter;
+import ru.artemdikov.bellproject.validation.group.Default;
+import ru.artemdikov.bellproject.validation.group.OnCreate;
+import ru.artemdikov.bellproject.validation.group.OnUpdate;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -40,6 +43,7 @@ public interface UserService {
      *
      * @param userDto
      */
+    @Validated({OnCreate.class, Default.class})
     void add(@Valid UserDto userDto);
 
     /**
@@ -47,5 +51,6 @@ public interface UserService {
      *
      * @param userDto
      */
+    @Validated({OnUpdate.class, Default.class})
     void update(@Valid UserDto userDto);
 }
