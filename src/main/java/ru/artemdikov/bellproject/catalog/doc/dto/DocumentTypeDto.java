@@ -1,14 +1,11 @@
 package ru.artemdikov.bellproject.catalog.doc.dto;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class DocumentTypeDto {
 
-    @Size(max = 2)
+    @Size(max = 2, min = 2)
     @NotEmpty(message = "code cannot be null")
     private String code;
 
@@ -16,4 +13,19 @@ public class DocumentTypeDto {
     @NotEmpty(message = "name cannot be null")
     private String name;
 
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

@@ -6,7 +6,7 @@ import ru.artemdikov.bellproject.catalog.doc.model.DocumentType;
 import java.util.List;
 
 /**
- * DAO для работы с DocumentType
+ * Repository для работы с DocumentType
  */
 public interface DocTypeRepository extends JpaRepository<DocumentType, String> {
     /**
@@ -15,19 +15,4 @@ public interface DocTypeRepository extends JpaRepository<DocumentType, String> {
      * @return
      */
     List<DocumentType> findAll();
-
-    /**
-     * Получить DocumentType по коду
-     *
-     * @param code
-     * @return
-     */
-    DocumentType findByCode(String code);
-
-    /**
-     * Сохранить DocumentType
-     *
-     * @param documentType
-     */
-    DocumentType save (DocumentType documentType);
 }

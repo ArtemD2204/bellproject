@@ -35,12 +35,4 @@ public class DocTypeServiceImpl implements DocTypeService {
         return mapperFacade.mapAsList(all, DocumentTypeDto.class);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public DocumentType getModelByCode(String code) {
-        return repository.findByCode(code);
-    }
-
 }
