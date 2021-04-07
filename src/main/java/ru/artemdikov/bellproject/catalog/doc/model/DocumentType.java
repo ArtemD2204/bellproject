@@ -18,7 +18,7 @@ public class DocumentType {
     /**
      * Название
      */
-    @Column(name = "name", length = 150, nullable = false)
+    @Column(name = "name", length = 150, nullable = false, unique = true)
     private String name;
 
     public String getCode() {

@@ -39,9 +39,9 @@ COMMENT ON TABLE User IS 'Пользователь';
 CREATE TABLE IF NOT EXISTS Document (
     id         INTEGER              COMMENT 'Уникальный идентификатор и foreign key на User' PRIMARY KEY,
     version    INTEGER NOT NULL     COMMENT 'Служебное поле hibernate',
-    doc_number VARCHAR(30) NOT NULL COMMENT 'Номер документа',
-    doc_date   DATE NOT NULL        COMMENT 'Дата документа',
-    doc_code   CHAR(2) NOT NULL     COMMENT 'Тип документа'
+    doc_number VARCHAR(30)          COMMENT 'Номер документа',
+    doc_date   DATE                 COMMENT 'Дата документа',
+    doc_code   CHAR(2)              COMMENT 'Тип документа'
 );
 
 CREATE TABLE IF NOT EXISTS Document_Type (
@@ -85,3 +85,6 @@ CREATE INDEX IX_User_Position ON User (position);
 CREATE INDEX IX_Document_Doc_Code ON Document (doc_code);
 ALTER TABLE Document ADD FOREIGN KEY (doc_code) REFERENCES Document_Type(code);
 ALTER TABLE Document ADD FOREIGN KEY (id) REFERENCES User(id);
+
+-- Document_Type indexes and foreign keys
+CREATE UNIQUE INDEX UX_Document_Type_Name ON Document_Type (name);

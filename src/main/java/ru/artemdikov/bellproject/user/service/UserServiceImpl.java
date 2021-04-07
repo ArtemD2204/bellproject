@@ -5,12 +5,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.artemdikov.bellproject.catalog.country.model.Country;
 import ru.artemdikov.bellproject.catalog.country.repository.CountryRepository;
+import ru.artemdikov.bellproject.catalog.doc.model.DocumentType;
 import ru.artemdikov.bellproject.catalog.doc.repository.DocTypeRepository;
 import ru.artemdikov.bellproject.document.model.Document;
 import ru.artemdikov.bellproject.exception.EntityNotFoundException;
 import ru.artemdikov.bellproject.model.mapper.MapperFacade;
 import ru.artemdikov.bellproject.office.dao.OfficeDao;
-import ru.artemdikov.bellproject.office.model.Office;
 import ru.artemdikov.bellproject.user.dao.UserDao;
 import ru.artemdikov.bellproject.user.dto.UserDto;
 import ru.artemdikov.bellproject.user.dto.UserDtoShort;
@@ -21,7 +21,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 /**
  * {@inheritDoc}
@@ -94,7 +93,6 @@ public class UserServiceImpl implements UserService {
     public void update(UserDto dto) {
         User user = dao.loadById(dto.getId());
         mapDtoToModel(dto, user);
-//        dao.update(user); // не нужно
     }
 
     private void mapDtoToModel(UserDto userDto, User user) {
@@ -127,29 +125,50 @@ public class UserServiceImpl implements UserService {
             }
             user.setCountry(country);
         }
-        if (userDto.getDocCode() != null || userDto.getDocName() != null || userDto.getDocNumber() != null || userDto.getDocDate() != null){
-            Document document;
-            if (user.getId() == null) { // если новый user
-                document = new Document();
-            } else {
-                document = user.getDocument();
-                if (document == null) {
-                    document = new Document();
-                }
-            }
-            updateDocument(document, userDto);
+        Document document;
+        if (user.getId() == null) { // если новый user
+            document = new Document();
             user.addDocument(document);
+        } else {
+            document = user.getDocument();
         }
+        updateDocument(document, userDto);
     }
 
     private void updateDocument(Document document, UserDto userDto) {
-        document.setDocumentType(docTypeRepository.getOne(docCode));
-        document.setDocNumber(docNumber);
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            document.setDocDate(dateFormat.parse(docDate));
-        } catch (ParseException e) {
-            throw new RuntimeException("userDto.docDate to user.document.docDate mapping error", e);
+        DocumentType documentType;
+        String docCode = userDto.getDocCode();
+        String docName = userDto.getDocName();
+        if (docCode != null && docName != null) {
+            documentType = docTypeRepository.findByCodeAndName(docCode, docName);
+            if (documentType == null) {
+                throw new EntityNotFoundException("DocumentType not found for docCode=" + docCode
+                        + " and docName=" + docName + ".");
+            }
+            document.setDocumentType(documentType);
+        } else if (docCode != null) {
+            documentType = docTypeRepository.findById(docCode).orElse(null);
+            if (documentType == null) {
+                throw new EntityNotFoundException("DocumentType not found for docCode=" + docCode + ".");
+            }
+            document.setDocumentType(documentType);
+        } else if (docName != null) {
+            documentType = docTypeRepository.findByName(docName);
+            if (documentType == null) {
+                throw new EntityNotFoundException("DocumentType not found for docName=" + docName + ".");
+            }
+            document.setDocumentType(documentType);
+        }
+        if (userDto.getDocNumber() != null) {
+            document.setDocNumber(userDto.getDocNumber());
+        }
+        if (userDto.getDocDate() != null) {
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                document.setDocDate(dateFormat.parse(userDto.getDocDate()));
+            } catch (ParseException e) {
+                throw new RuntimeException("userDto.docDate to user.document.docDate mapping error", e);
+            }
         }
     }
 }

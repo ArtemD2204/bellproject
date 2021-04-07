@@ -15,4 +15,19 @@ public interface DocTypeRepository extends JpaRepository<DocumentType, String> {
      * @return
      */
     List<DocumentType> findAll();
+
+    /**
+     * Получить объект DocumentType по имени
+     * @param name
+     * @return
+     */
+    DocumentType findByName(String name);
+
+    /**
+     * Получить объект DocumentType по коду и имени
+     * @param code
+     * @param name
+     * @return
+     */
+    DocumentType findByCodeAndName(String code, String name);
 }
