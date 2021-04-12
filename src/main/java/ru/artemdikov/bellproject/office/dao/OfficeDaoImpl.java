@@ -6,8 +6,7 @@ import ru.artemdikov.bellproject.exception.EntityNotFoundException;
 import ru.artemdikov.bellproject.office.dto.OfficeFilter;
 import ru.artemdikov.bellproject.office.model.Office;
 
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
+import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -33,7 +32,7 @@ public class OfficeDaoImpl implements OfficeDao {
      */
     @Override
     public List<Office> all() {
-        TypedQuery<Office> query = em.createQuery("SELECT o FROM Office o", Office.class);
+        Query query = em.createNativeQuery("SELECT o.* FROM Office o", Office.class);
         return query.getResultList();
     }
 
@@ -42,7 +41,9 @@ public class OfficeDaoImpl implements OfficeDao {
      */
     @Override
     public Office loadById(Long id) {
-        Office office = em.find(Office.class, id);
+        TypedQuery<Office> query = em.createNamedQuery("Office.findById", Office.class);
+        query.setParameter("id", id);
+        Office office = query.getSingleResult();
         if (office == null) {
             throw new EntityNotFoundException("Office not found for id=" + id + ".");
         }

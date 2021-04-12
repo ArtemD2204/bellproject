@@ -30,7 +30,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public List<User> all() {
         TypedQuery<User> query = em.createQuery(
-                "SELECT u FROM User u join fetch u.document d join fetch d.documentType",
+                "SELECT u FROM User u join fetch u.document d join fetch d.documentType join fetch u.country",
                 User.class
         );
         List<User> users = query.getResultList();

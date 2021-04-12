@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS Office (
 COMMENT ON TABLE Office IS 'Офис';
 
 CREATE TABLE IF NOT EXISTS User (
-    id              INTEGER                 COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT,
+    user_id              INTEGER                 COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT,
     version         INTEGER NOT NULL        COMMENT 'Служебное поле hibernate',
     first_name      VARCHAR(50) NOT NULL    COMMENT 'Имя',
     second_name     VARCHAR(50)             COMMENT 'Фамилия',
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS User (
 COMMENT ON TABLE User IS 'Пользователь';
 
 CREATE TABLE IF NOT EXISTS Document (
-    id         INTEGER              COMMENT 'Уникальный идентификатор и foreign key на User' PRIMARY KEY,
+    doc_id         INTEGER              COMMENT 'Уникальный идентификатор и foreign key на User' PRIMARY KEY,
     version    INTEGER NOT NULL     COMMENT 'Служебное поле hibernate',
     doc_number VARCHAR(30)          COMMENT 'Номер документа',
     doc_date   DATE                 COMMENT 'Дата документа',
@@ -84,7 +84,7 @@ CREATE INDEX IX_User_Position ON User (position);
 -- Document indexes and foreign keys
 CREATE INDEX IX_Document_Doc_Code ON Document (doc_code);
 ALTER TABLE Document ADD FOREIGN KEY (doc_code) REFERENCES Document_Type(code);
-ALTER TABLE Document ADD FOREIGN KEY (id) REFERENCES User(id);
+ALTER TABLE Document ADD FOREIGN KEY (doc_id) REFERENCES User(user_id);
 
 -- Document_Type indexes and foreign keys
 CREATE UNIQUE INDEX UX_Document_Type_Name ON Document_Type (name);

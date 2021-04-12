@@ -71,6 +71,7 @@ public class UserServiceImpl implements UserService {
     @Transactional(readOnly = true)
     public UserDto getById(Long id) {
         User user = dao.loadById(id);
+        System.out.println("================================================================");
         return mapperFacade.map(user, UserDto.class);
     }
 

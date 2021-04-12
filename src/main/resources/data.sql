@@ -25,16 +25,16 @@ INSERT INTO Document_Type (code, name) VALUES ('03', 'Свидетельство
 INSERT INTO Document_Type (code, name) VALUES ('07', 'Военный билет');
 INSERT INTO Document_Type (code, name) VALUES ('21', 'Паспорт гражданина РФ');
 
-INSERT INTO User (id, version, first_name, second_name, middle_name, position, phone, office_id, country_code)
-    VALUES (1, 0, 'Пётр', 'Петров', 'Петрович', 'proger', '8-789-465-11-11', 1, '643');
-INSERT INTO User (id, version, first_name, second_name, middle_name, position, phone, is_identified, office_id, country_code)
+INSERT INTO User (user_id, version, first_name, second_name, middle_name, position, phone, office_id, country_code)
+    VALUES (1, 0, 'Пётр', 'Петров', 'Петрович', 'proger', '8-789-465-11-11', 1, '060');
+INSERT INTO User (user_id, version, first_name, second_name, middle_name, position, phone, is_identified, office_id, country_code)
     VALUES (2, 0, 'John', 'Smith', 'Петрович', 'coder', '8-654-987-7-7',  FALSE, 1, '643');
-INSERT INTO User (id, version, first_name, second_name, middle_name, position, phone, office_id, country_code)
-    VALUES (3, 0, 'John', 'Snow', 'Иванович', 'developer', '8-987-123-11', 5, '643');
-INSERT INTO User (id, version, first_name, second_name, middle_name, position, phone, office_id, country_code)
+INSERT INTO User (user_id, version, first_name, second_name, middle_name, position, phone, office_id, country_code)
+    VALUES (3, 0, 'John', 'Snow', 'Иванович', 'developer', '8-987-123-11', 5, '646');
+INSERT INTO User (user_id, version, first_name, second_name, middle_name, position, phone, office_id, country_code)
     VALUES (4, 0, 'Иван', 'Smith', 'Иванович', 'developer', '8-999-123-11', 6, '010');
 
-INSERT INTO Document (id, version, doc_number, doc_date, doc_code) VALUES (1, 0, '1234 567891', '2017-05-23', '21');
-INSERT INTO Document (id, version, doc_number, doc_date, doc_code) VALUES (2, 0, '2345 678912', '2017-05-23', '07');
-INSERT INTO Document (id, version, doc_number, doc_date, doc_code) VALUES (3, 0, '3456 789123', '2020-11-19', '07');
-INSERT INTO Document (id, version, doc_number, doc_date, doc_code) VALUES (4, 0, '159487', '2000-09-19', '21');
+INSERT INTO Document (doc_id, version, doc_number, doc_date, doc_code) VALUES (1, 0, '1234 567891', '2017-05-23', '21');
+INSERT INTO Document (doc_id, version, doc_number, doc_date, doc_code) VALUES (2, 0, '2345 678912', '2017-05-23', '07');
+INSERT INTO Document (doc_id, version, doc_number, doc_date, doc_code) VALUES (3, 0, '3456 789123', '2020-11-19', '07');
+INSERT INTO Document (doc_id, version, doc_number, doc_date, doc_code) VALUES (4, 0, '159487', '2000-09-19', '21');

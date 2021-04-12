@@ -14,7 +14,7 @@ import java.util.Date;
 public class Document {
 
     @Id
-    @Column(name = "Id")
+    @Column(name = "doc_id")
     private Long id;
 
     /**
@@ -26,13 +26,13 @@ public class Document {
     /**
      * Номер документа
      */
-    @Column(name = "doc_number", length = 30, nullable = false)
+    @Column(name = "doc_number", length = 30)
     private String docNumber;
 
     /**
      * Дата документа
      */
-    @Column(name = "doc_date", nullable = false)
+    @Column(name = "doc_date")
     @Temporal(TemporalType.DATE)
     private Date docDate;
 
@@ -40,14 +40,14 @@ public class Document {
      * Тип документа
      */
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "doc_code", referencedColumnName = "code", nullable = false)
+    @JoinColumn(name = "doc_code", referencedColumnName = "code")
     private DocumentType documentType;
 
     /**
      * Пользователь
      */
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "doc_id", referencedColumnName = "user_id")
     @MapsId
     private User user;
 

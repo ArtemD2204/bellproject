@@ -2,7 +2,11 @@ package ru.artemdikov.bellproject.office.service;
 
 import org.springframework.validation.annotation.Validated;
 import ru.artemdikov.bellproject.office.dto.OfficeDto;
-import ru.artemdikov.bellproject.office.model.Office;
+import ru.artemdikov.bellproject.office.dto.OfficeDtoShort;
+import ru.artemdikov.bellproject.office.dto.OfficeFilter;
+import ru.artemdikov.bellproject.validation.group.Default;
+import ru.artemdikov.bellproject.validation.group.OnCreate;
+import ru.artemdikov.bellproject.validation.group.OnUpdate;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -14,24 +18,40 @@ import java.util.List;
 public interface OfficeService {
 
     /**
-     * Добавить новый офис в БД
-     *
-     * @param officeDto
-     */
-    void add(@Valid OfficeDto officeDto);
-
-    /**
      * Получить список офисов
      *
      * @return {@OfficeDto}
      */
-    List<OfficeDto> offices();
+    List<OfficeDto> allOffices();
 
     /**
-     * Получить Office model по id
+     * Получить отфильтрованный список офисов
      *
-     * @param id
-     * @return {@Office}
+     * @return {@List<OfficeDtoShort>}
      */
-    Office getModelById(Long id);
+    List<OfficeDtoShort> filteredOfficeList(@Valid OfficeFilter officeFilter);
+
+    /**
+     * Получить Office по id
+     *
+     * @return {OfficeDto}
+     */
+    OfficeDto getById(Long id);
+
+    /**
+     * Добавить новый офис в БД
+     *
+     * @param officeDto
+     */
+    @Validated({OnCreate.class, Default.class})
+    void add(@Valid OfficeDto officeDto);
+
+    /**
+     * Обновить офис в БД
+     *
+     * @param officeDto
+     */
+    @Validated({OnUpdate.class, Default.class})
+    void update(@Valid OfficeDto officeDto);
+
 }

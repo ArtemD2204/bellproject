@@ -48,16 +48,14 @@ public class UserDto {
     @Size(min = 3, max = 3, groups = Default.class)
     private String citizenshipCode;
 
+    private String citizenshipName;
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public void setDocName(String docName) {
-        this.docName = docName;
     }
 
     public String getFirstName() {
@@ -124,6 +122,14 @@ public class UserDto {
         this.docCode = docCode;
     }
 
+    public String getDocName() {
+        return docName;
+    }
+
+    public void setDocName(String docName) {
+        this.docName = docName;
+    }
+
     public String getDocNumber() {
         return docNumber;
     }
@@ -148,7 +154,11 @@ public class UserDto {
         this.citizenshipCode = citizenshipCode;
     }
 
-    public String getDocName() {
-        return docName;
+    public String getCitizenshipName() {
+        return citizenshipName;
+    }
+
+    public void setCitizenshipName(String citizenshipName) {
+        this.citizenshipName = citizenshipName;
     }
 }

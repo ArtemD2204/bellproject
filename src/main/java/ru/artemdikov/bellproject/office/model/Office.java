@@ -9,6 +9,12 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "Office")
+@NamedQueries({
+        @NamedQuery(
+                name = "Office.findById",
+                query = "SELECT o FROM Office o WHERE o.id=:id"
+        )
+})
 public class Office {
 
     @Id

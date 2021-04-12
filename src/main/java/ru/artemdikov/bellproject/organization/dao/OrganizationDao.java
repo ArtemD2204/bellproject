@@ -1,14 +1,12 @@
-package ru.artemdikov.bellproject.user.dao;
+package ru.artemdikov.bellproject.organization.dao;
 
+import ru.artemdikov.bellproject.organization.model.Organization;
 import ru.artemdikov.bellproject.user.dto.UserFilter;
 import ru.artemdikov.bellproject.user.model.User;
 
 import java.util.List;
 
-/**
- * DAO для работы с User
- */
-public interface UserDao {
+public interface OrganizationDao {
     /**
      * Получить все объекты User
      *
@@ -22,7 +20,7 @@ public interface UserDao {
      * @param id
      * @return
      */
-    User loadById(Long id);
+    Organization loadById(Long id);
 
     /**
      * Получить отфильтрованный список объектов User

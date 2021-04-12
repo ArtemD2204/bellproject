@@ -1,28 +1,34 @@
 package ru.artemdikov.bellproject.office.dto;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import ru.artemdikov.bellproject.validation.group.Default;
+import ru.artemdikov.bellproject.validation.group.OnCreate;
+import ru.artemdikov.bellproject.validation.group.OnUpdate;
+
+import javax.validation.constraints.*;
 
 public class OfficeDto {
 
+    @Null(groups = OnCreate.class)
+    @Min(value = 1, message = "id should not be less than 1", groups = OnUpdate.class)
+    @NotNull(groups = OnUpdate.class)
     private Long id;
 
-    @Size(max = 150)
-    @NotEmpty(message = "name cannot be null")
+    @Size(max = 150, groups = Default.class)
+    @NotEmpty(message = "name cannot be null", groups = OnUpdate.class)
     private String name;
 
-    @Size(max = 255)
-    @NotEmpty(message = "address cannot be null")
+    @Size(max = 255, groups = Default.class)
+    @NotEmpty(message = "address cannot be null", groups = OnUpdate.class)
     private String address;
 
-    @Size(max = 30)
+    @Size(max = 30, groups = Default.class)
     private String phone;
 
     private Boolean isActive;
 
-    @NotNull(message = "organizationId can not be null")
-    private Long organizationId;
+    @NotNull(message = "orgId can not be null", groups = OnCreate.class)
+    @Null(message = "orgId can not be changed", groups = OnUpdate.class)
+    private Long orgId;
 
     public Long getId() {
         return id;
@@ -64,11 +70,11 @@ public class OfficeDto {
         isActive = active;
     }
 
-    public Long getOrganizationId() {
-        return organizationId;
+    public Long getOrgId() {
+        return orgId;
     }
 
-    public void setOrganizationId(Long organizationId) {
-        this.organizationId = organizationId;
+    public void setOrgId(Long organizationId) {
+        this.orgId = organizationId;
     }
 }
