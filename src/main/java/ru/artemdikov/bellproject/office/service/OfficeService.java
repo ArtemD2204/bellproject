@@ -29,7 +29,7 @@ public interface OfficeService {
      *
      * @return {@List<OfficeDtoShort>}
      */
-    List<OfficeDtoShort> filteredOfficeList(@Valid OfficeFilter officeFilter);
+    List<OfficeDtoShort> getFilteredOfficeList(@Valid OfficeFilter officeFilter);
 
     /**
      * Получить Office по id

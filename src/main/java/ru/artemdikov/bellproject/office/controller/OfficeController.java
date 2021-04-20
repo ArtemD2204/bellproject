@@ -44,6 +44,6 @@ public class OfficeController {
 
     @PostMapping("/list")
     public List<OfficeDtoShort> list(@RequestBody OfficeFilter officeFilter) {
-        return officeService.filteredOfficeList(officeFilter);
+        return officeService.getFilteredOfficeList(officeFilter);
     }
 }

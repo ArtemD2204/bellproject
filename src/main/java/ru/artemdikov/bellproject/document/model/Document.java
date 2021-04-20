@@ -48,6 +48,7 @@ public class Document {
      */
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "doc_id", referencedColumnName = "user_id")
+//    @PrimaryKeyJoinColumn
     @MapsId
     private User user;
 

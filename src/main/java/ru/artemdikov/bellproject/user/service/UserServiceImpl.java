@@ -51,6 +51,9 @@ public class UserServiceImpl implements UserService {
     @Transactional(readOnly = true)
     public List<UserDto> allUsers() {
         List<User> all = dao.all();
+        if (all.size() == 0) {
+            throw new EntityNotFoundException("No users in database.");
+        }
         return mapperFacade.mapAsList(all, UserDto.class);
     }
 
@@ -61,6 +64,9 @@ public class UserServiceImpl implements UserService {
     @Transactional(readOnly = true)
     public List<UserDtoShort> filteredUserList(UserFilter userFilter) {
         List<User> userList = dao.loadByFilter(userFilter);
+        if (userList.size() == 0) {
+            throw new EntityNotFoundException("No users were found. Please, change filters parameters.");
+        }
         return mapperFacade.mapAsList(userList, UserDtoShort.class);
     }
 
@@ -71,7 +77,9 @@ public class UserServiceImpl implements UserService {
     @Transactional(readOnly = true)
     public UserDto getById(Long id) {
         User user = dao.loadById(id);
-        System.out.println("================================================================");
+        if (user == null) {
+            throw new EntityNotFoundException("User not found for id=" + id + ".");
+        }
         return mapperFacade.map(user, UserDto.class);
     }
 

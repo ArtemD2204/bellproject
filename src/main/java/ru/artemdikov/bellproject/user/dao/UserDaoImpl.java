@@ -3,7 +3,6 @@ package ru.artemdikov.bellproject.user.dao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ru.artemdikov.bellproject.user.dto.UserFilter;
-import ru.artemdikov.bellproject.exception.EntityNotFoundException;
 import ru.artemdikov.bellproject.user.model.User;
 
 import javax.persistence.EntityManager;
@@ -33,11 +32,7 @@ public class UserDaoImpl implements UserDao {
                 "SELECT u FROM User u join fetch u.document d join fetch d.documentType join fetch u.country",
                 User.class
         );
-        List<User> users = query.getResultList();
-        if (users.size() == 0) {
-            throw new EntityNotFoundException("No users in database.");
-        }
-        return users;
+        return query.getResultList();
     }
 
     /**
@@ -45,11 +40,7 @@ public class UserDaoImpl implements UserDao {
      */
     @Override
     public User loadById(Long id) {
-        User user = em.find(User.class, id);
-        if (user == null) {
-            throw new EntityNotFoundException("User not found for id=" + id + ".");
-        }
-        return user;
+        return em.find(User.class, id);
     }
 
     /**
@@ -59,11 +50,7 @@ public class UserDaoImpl implements UserDao {
     public List<User> loadByFilter(UserFilter userFilter) {
         CriteriaQuery<User> criteriaQuery = buildCriteria(userFilter);
         TypedQuery<User> query = em.createQuery(criteriaQuery);
-        List<User> users = query.getResultList();
-        if (users.size() == 0) {
-            throw new EntityNotFoundException("No users were found. Please, change filters parameters.");
-        }
-        return users;
+        return query.getResultList();
     }
 
     /**

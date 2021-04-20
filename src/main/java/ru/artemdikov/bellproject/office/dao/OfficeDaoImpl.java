@@ -2,7 +2,6 @@ package ru.artemdikov.bellproject.office.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import ru.artemdikov.bellproject.exception.EntityNotFoundException;
 import ru.artemdikov.bellproject.office.dto.OfficeFilter;
 import ru.artemdikov.bellproject.office.model.Office;
 
@@ -43,11 +42,7 @@ public class OfficeDaoImpl implements OfficeDao {
     public Office loadById(Long id) {
         TypedQuery<Office> query = em.createNamedQuery("Office.findById", Office.class);
         query.setParameter("id", id);
-        Office office = query.getSingleResult();
-        if (office == null) {
-            throw new EntityNotFoundException("Office not found for id=" + id + ".");
-        }
-        return office;
+        return query.getSingleResult();
     }
 
     /**
@@ -62,11 +57,7 @@ public class OfficeDaoImpl implements OfficeDao {
     public List<Office> loadByFilter(OfficeFilter officeFilter) {
         CriteriaQuery<Office> criteriaQuery = buildCriteria(officeFilter);
         TypedQuery<Office> query = em.createQuery(criteriaQuery);
-        List<Office> offices = query.getResultList();
-        if (offices.size() == 0) {
-            throw new EntityNotFoundException("No offices were found. Please, change filters parameters.");
-        }
-        return offices;
+        return query.getResultList();
     }
 
     /**

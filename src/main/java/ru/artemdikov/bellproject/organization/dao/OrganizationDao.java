@@ -1,21 +1,20 @@
 package ru.artemdikov.bellproject.organization.dao;
 
+import ru.artemdikov.bellproject.organization.dto.OrgFilter;
 import ru.artemdikov.bellproject.organization.model.Organization;
-import ru.artemdikov.bellproject.user.dto.UserFilter;
-import ru.artemdikov.bellproject.user.model.User;
 
 import java.util.List;
 
 public interface OrganizationDao {
     /**
-     * Получить все объекты User
+     * Получить все объекты Organization
      *
      * @return
      */
-    List<User> all();
+    List<Organization> all();
 
     /**
-     * Получить User по идентификатору
+     * Получить Organization по идентификатору
      *
      * @param id
      * @return
@@ -23,24 +22,24 @@ public interface OrganizationDao {
     Organization loadById(Long id);
 
     /**
-     * Получить отфильтрованный список объектов User
+     * Получить отфильтрованный список объектов Organization
      *
-     * @param userFilter
+     * @param orgFilter
      * @return
      */
-    List<User> loadByFilter(UserFilter userFilter);
+    List<Organization> loadByFilter(OrgFilter orgFilter);
 
     /**
-     * Сохранить User
+     * Сохранить Organization
      *
-     * @param user
+     * @param organization
      */
-    void save(User user);
+    void save(Organization organization);
 
     /**
-     * Обновить User
+     * Обновить Organization
      *
-     * @param user
+     * @param organization
      */
-    public void update(User user);
+    public void update(Organization organization);
 }

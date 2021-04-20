@@ -1,69 +1,49 @@
-package ru.artemdikov.bellproject.organization.model;
+package ru.artemdikov.bellproject.organization.dto;
 
-import javax.persistence.*;
+import ru.artemdikov.bellproject.validation.group.Default;
+import ru.artemdikov.bellproject.validation.group.OnCreate;
+import ru.artemdikov.bellproject.validation.group.OnUpdate;
 
-/**
- * Оранизация
- */
-@Entity
-@Table(name = "Organization")
-public class Organization {
+import javax.validation.constraints.*;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Id")
+public class OrgDto {
+
+    @Null(groups = OnCreate.class)
+    @Min(value = 1, message = "id should not be less than 1", groups = OnUpdate.class)
+    @NotNull(groups = OnUpdate.class)
     private Long id;
 
-    /**
-     * Служебное поле hibernate
-     */
-    @Version
-    private Integer version;
-
-    /**
-     * Название
-     */
-    @Column(name = "name", length = 150, nullable = false)
+    @Size(max = 150, groups = Default.class)
+    @NotEmpty(message = "name cannot be empty", groups = Default.class)
     private String name;
 
-    /**
-     * Полное название
-     */
-    @Column(name = "full_name", length = 255, nullable = false)
+    @Size(max = 255, groups = Default.class)
+    @NotEmpty(message = "fullName cannot be empty", groups = Default.class)
     private String fullName;
 
-    /**
-     * ИНН
-     */
-    @Column(name = "inn", length = 20, nullable = false)
+    @Size(max = 20, groups = Default.class)
+    @NotEmpty(message = "inn cannot be empty", groups = Default.class)
     private String inn;
 
-    /**
-     * КПП
-     */
-    @Column(name = "kpp", length = 20, nullable = false)
+    @Size(max = 20, groups = Default.class)
+    @NotEmpty(message = "kpp cannot be empty", groups = Default.class)
     private String kpp;
 
-    /**
-     * Адрес
-     */
-    @Column(name = "address", length = 255, nullable = false)
+    @Size(max = 255, groups = Default.class)
+    @NotEmpty(message = "address cannot be empty", groups = Default.class)
     private String address;
 
-    /**
-     * Телефон
-     */
-    @Column(name = "phone", length = 30, nullable = false)
+    @Size(max = 30, groups = Default.class)
     private String phone;
 
-    /**
-     * boolean
-     */
-    @Column(name = "is_active", columnDefinition = "boolean default true")
     private Boolean isActive;
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -121,5 +101,4 @@ public class Organization {
     public void setIsActive(Boolean active) {
         isActive = active;
     }
-
 }

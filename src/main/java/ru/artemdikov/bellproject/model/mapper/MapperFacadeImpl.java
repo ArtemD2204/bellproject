@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.artemdikov.bellproject.office.dto.OfficeDto;
 import ru.artemdikov.bellproject.office.model.Office;
+import ru.artemdikov.bellproject.organization.dto.OrgDto;
+import ru.artemdikov.bellproject.organization.model.Organization;
 import ru.artemdikov.bellproject.user.dto.UserDto;
 import ru.artemdikov.bellproject.user.model.User;
 
@@ -51,6 +53,7 @@ public class MapperFacadeImpl implements MapperFacade {
     private void registerMappedClasses() {
         registerUser();
         registerOffice();
+        registerOrganization();
     }
 
     private void registerUser() {
@@ -63,12 +66,20 @@ public class MapperFacadeImpl implements MapperFacade {
                 .field("document.docNumber", "docNumber")
                 .field("document.docDate", "docDate")
                 .byDefault()
+
                 .register();
     }
 
     private void registerOffice() {
         mapperFactory.classMap(Office.class, OfficeDto.class)
                 .field("organization.id", "orgId")
+                .byDefault()
+                .register();
+    }
+
+    private void registerOrganization() {
+        mapperFactory.classMap(Organization.class, OrgDto.class)
+                .mapNullsInReverse(false)
                 .byDefault()
                 .register();
     }
