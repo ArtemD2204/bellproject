@@ -12,7 +12,7 @@ public class DocumentType {
      * Код
      */
     @Id
-    @Column(name = "code", length = 2)
+    @Column(name = "code", columnDefinition = "CHAR(2)")
     private String code;
 
     /**

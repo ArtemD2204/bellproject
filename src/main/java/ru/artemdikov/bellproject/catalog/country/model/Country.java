@@ -14,7 +14,7 @@ public class Country {
      * Код
      */
     @Id
-    @Column(name = "code", length = 3)
+    @Column(name = "code", columnDefinition = "CHAR(3)")
     private String code;
 
     /**

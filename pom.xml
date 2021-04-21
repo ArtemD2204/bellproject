@@ -26,6 +26,11 @@
     </parent>
 
     <dependencies>
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>2.3.1</version>
+        </dependency>
 
         <!-- Встроенный http сервер -->
         <dependency>
@@ -127,7 +132,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>ru.bellintegrator.practice.Application</mainClass>
+                    <mainClass>ru.artemdikov.bellproject.Application</mainClass>
                     <jvmArguments>
                         -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005
                     </jvmArguments>
