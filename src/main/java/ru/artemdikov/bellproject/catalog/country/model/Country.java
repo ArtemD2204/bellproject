@@ -4,7 +4,7 @@ package ru.artemdikov.bellproject.catalog.country.model;
 import javax.persistence.*;
 
 /**
- * Пользователь
+ * Страна
  */
 @Entity
 @Table(name = "Country")

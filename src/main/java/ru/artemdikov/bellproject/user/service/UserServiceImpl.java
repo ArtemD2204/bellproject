@@ -11,6 +11,7 @@ import ru.artemdikov.bellproject.document.model.Document;
 import ru.artemdikov.bellproject.exception.EntityNotFoundException;
 import ru.artemdikov.bellproject.model.mapper.MapperFacade;
 import ru.artemdikov.bellproject.office.dao.OfficeDao;
+import ru.artemdikov.bellproject.office.model.Office;
 import ru.artemdikov.bellproject.user.dao.UserDao;
 import ru.artemdikov.bellproject.user.dto.UserDto;
 import ru.artemdikov.bellproject.user.dto.UserDtoShort;
@@ -34,6 +35,14 @@ public class UserServiceImpl implements UserService {
     private final CountryRepository countryRepository;
     private final DocTypeRepository docTypeRepository;
 
+    /**
+     * Конструктор
+     * @param dao
+     * @param mapperFacade
+     * @param officeDao
+     * @param countryRepository
+     * @param docTypeRepository
+     */
     @Autowired
     public UserServiceImpl(UserDao dao, MapperFacade mapperFacade, OfficeDao officeDao,
                            CountryRepository countryRepository, DocTypeRepository docTypeRepository) {
@@ -102,30 +111,51 @@ public class UserServiceImpl implements UserService {
     public void update(UserDto dto) {
         User user = dao.loadById(dto.getId());
         mapDtoToModel(dto, user);
+        dao.update(user);
     }
 
     private void mapDtoToModel(UserDto userDto, User user) {
-        if (userDto.getFirstName() != null) {
+        if (userDto.getFirstName() != null && !userDto.getFirstName().isEmpty()) {
             user.setFirstName(userDto.getFirstName());
         }
-        if (userDto.getSecondName() != null) {
+        if (userDto.getSecondName() != null && !userDto.getSecondName().isEmpty()) {
             user.setSecondName(userDto.getSecondName());
         }
-        if (userDto.getMiddleName() != null) {
+        if (userDto.getMiddleName() != null && !userDto.getMiddleName().isEmpty()) {
             user.setMiddleName(userDto.getMiddleName());
         }
-        if (userDto.getPhone() != null) {
+        if (userDto.getPhone() != null && !userDto.getPhone().isEmpty()) {
             user.setPhone(userDto.getPhone());
         }
-        if (userDto.getPosition() != null) {
+        if (userDto.getPosition() != null && !userDto.getPosition().isEmpty()) {
             user.setPosition(userDto.getPosition());
         }
         if (userDto.getIdentified() != null) {
             user.setIdentified(userDto.getIdentified());
         }
-        if (userDto.getOfficeId() != null) {
-            user.setOffice(officeDao.loadById(userDto.getOfficeId()));
+        mapOffice(userDto, user);
+        mapCountry(userDto, user);
+        Document document;
+        if (user.getId() == null) { // если новый user
+            document = new Document();
+            user.addDocument(document);
+        } else {
+            document = user.getDocument();
         }
+        updateDocument(userDto, document);
+    }
+
+    private void mapOffice(UserDto userDto, User user) {
+        if (userDto.getOfficeId() != null) {
+            Office office = officeDao.loadById(userDto.getOfficeId());
+            if (office == null) {
+                throw new EntityNotFoundException("Office not found for id=" + userDto.getOfficeId() + ".");
+            }
+            user.setOffice(office);
+        }
+    }
+
+    private void mapCountry(UserDto userDto, User user) {
         if (userDto.getCitizenshipCode() != null) {
             Country country = countryRepository.findById(userDto.getCitizenshipCode()).orElse(null);
             if (country == null) {
@@ -134,17 +164,9 @@ public class UserServiceImpl implements UserService {
             }
             user.setCountry(country);
         }
-        Document document;
-        if (user.getId() == null) { // если новый user
-            document = new Document();
-            user.addDocument(document);
-        } else {
-            document = user.getDocument();
-        }
-        updateDocument(document, userDto);
     }
 
-    private void updateDocument(Document document, UserDto userDto) {
+    private void updateDocument(UserDto userDto, Document document) {
         DocumentType documentType;
         String docCode = userDto.getDocCode();
         String docName = userDto.getDocName();
@@ -168,10 +190,10 @@ public class UserServiceImpl implements UserService {
             }
             document.setDocumentType(documentType);
         }
-        if (userDto.getDocNumber() != null) {
+        if (userDto.getDocNumber() != null && !userDto.getDocNumber().isEmpty()) {
             document.setDocNumber(userDto.getDocNumber());
         }
-        if (userDto.getDocDate() != null) {
+        if (userDto.getDocDate() != null && !userDto.getDocDate().isEmpty()) {
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             try {
                 document.setDocDate(dateFormat.parse(userDto.getDocDate()));

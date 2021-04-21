@@ -19,6 +19,11 @@ public class CountryServiceImpl implements CountryService {
     private final CountryRepository countryRepository;
     private final MapperFacade mapperFacade;
 
+    /**
+     * Конструктор - создание нового объекта сервиса
+     * @param countryRepository - repository для работы с Country
+     * @param mapperFacade - mapper для преобразования Country в CountryDto
+     */
     @Autowired
     public CountryServiceImpl(CountryRepository countryRepository, MapperFacade mapperFacade) {
         this.countryRepository = countryRepository;

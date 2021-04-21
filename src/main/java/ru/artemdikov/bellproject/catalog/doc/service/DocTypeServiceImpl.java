@@ -19,6 +19,11 @@ public class DocTypeServiceImpl implements DocTypeService {
     private final DocTypeRepository repository;
     private final MapperFacade mapperFacade;
 
+    /**
+     * Конструктор - создание нового объекта сервиса
+     * @param repository - repository для работы с DocumentType
+     * @param mapperFacade - mapper для преобразования DocumentType в DocumentTypeDto
+     */
     @Autowired
     public DocTypeServiceImpl(DocTypeRepository repository, MapperFacade mapperFacade) {
         this.repository = repository;

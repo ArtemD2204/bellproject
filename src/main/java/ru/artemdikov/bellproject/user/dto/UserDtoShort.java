@@ -5,21 +5,40 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+/**
+ * DTO класс для работы с User. Сокращенная информация
+ */
 public class UserDtoShort {
+
+    /**
+     * Идентификатор
+     */
     @Min(value = 1, message = "id should not be less than 1")
     @NotNull
     private Long id;
 
+    /**
+     * Имя
+     */
     @Size(max = 50)
     @NotEmpty(message = "firstName cannot be empty")
     private String firstName;
 
+    /**
+     * Фамилия
+     */
     @Size(max = 50)
     private String secondName;
 
+    /**
+     * Отчество
+     */
     @Size(max = 50)
     private String middleName;
 
+    /**
+     * Должность
+     */
     @Size(max = 100)
     @NotEmpty(message = "position cannot be empty")
     private String position;

@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.*;
 import ru.artemdikov.bellproject.controller.advice.dto.ErrorDto;
 import ru.artemdikov.bellproject.exception.EntityNotFoundException;
 
+/**
+ * Аспект срабатывает на вызовы методов контроллера и обрабатывает все исключения
+ */
 @RestControllerAdvice
 public class ExceptionHandlerController {
     private final Logger log = LoggerFactory.getLogger(getClass());
@@ -16,6 +19,12 @@ public class ExceptionHandlerController {
     private final char MIN_DIGIT = 48;
     private final char MAX_DIGIT = 57;
 
+    /**
+     * Обрабатывает исключения ru.artemdikov.bellproject.exception.EntityNotFoundException
+     * и javax.validation.ConstraintViolationException
+     * @param e - необработаанное исключение
+     * @return возвращает ResponseEntity<ErrorDto>
+     */
     @ExceptionHandler({EntityNotFoundException.class, javax.validation.ConstraintViolationException.class})
     public ResponseEntity<ErrorDto> unhandledException(Exception e) {
         log.error(e.getMessage());
@@ -30,6 +39,11 @@ public class ExceptionHandlerController {
         return responseEntity;
     }
 
+    /**
+     * Обрабатывает исключения, вызванные внутренними ошибками сервера
+     * @param e - необработаанное исключение
+     * @return возвращает ErrorDto
+     */
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ErrorDto unhandledInternalServerException(Exception e) {

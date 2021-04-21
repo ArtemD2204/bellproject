@@ -1,6 +1,12 @@
 package ru.artemdikov.bellproject.controller.advice.dto;
 
+/**
+ * Данные DTO
+ */
 public class DataDto {
+    /**
+     * Данные
+     */
     private Object data;
 
     public Object getData() {

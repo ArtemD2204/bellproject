@@ -12,7 +12,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 /**
- * Сервис
+ * Сервис для работы с User
  */
 @Validated
 public interface UserService {
@@ -20,26 +20,26 @@ public interface UserService {
     /**
      * Получить список всех пользователей
      *
-     * @return {@List<UserDto>}
+     * @return List<UserDto>
      */
     List<UserDto> allUsers();
 
     /**
      * Получить отфильтрованный список пользователей
-     *
-     * @return {@List<UserDtoShort>}
+     * @param userFilter - фильтр пользователей
+     * @return List<UserDtoShort>
      */
     List<UserDtoShort> filteredUserList(@Valid UserFilter userFilter);
 
     /**
      * Получить User по id
-     *
-     * @return {UserDto}
+     * @param id - идентификатор
+     * @return UserDto
      */
     UserDto getById(Long id);
 
     /**
-     * Добавить нового пользователя User в БД
+     * Добавить нового User
      *
      * @param userDto
      */
@@ -47,7 +47,7 @@ public interface UserService {
     void add(@Valid UserDto userDto);
 
     /**
-     * Обновить пользователя User в БД
+     * Обновить User
      *
      * @param userDto
      */

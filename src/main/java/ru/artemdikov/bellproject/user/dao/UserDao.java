@@ -12,28 +12,28 @@ public interface UserDao {
     /**
      * Получить все объекты User
      *
-     * @return
+     * @return List<User>
      */
     List<User> all();
 
     /**
      * Получить User по идентификатору
      *
-     * @param id
-     * @return
+     * @param id - идентификатор
+     * @return User
      */
     User loadById(Long id);
 
     /**
      * Получить отфильтрованный список объектов User
      *
-     * @param userFilter
-     * @return
+     * @param userFilter - фильтр пользователей
+     * @return List<User>
      */
     List<User> loadByFilter(UserFilter userFilter);
 
     /**
-     * Сохранить User
+     * Сохранить новый User
      *
      * @param user
      */
@@ -44,5 +44,5 @@ public interface UserDao {
      *
      * @param user
      */
-    public void update(User user);
+    void update(User user);
 }

@@ -5,6 +5,9 @@ import ru.artemdikov.bellproject.organization.model.Organization;
 
 import java.util.List;
 
+/**
+ * DAO для работы с Organization
+ */
 public interface OrganizationDao {
     /**
      * Получить все объекты Organization
@@ -41,5 +44,5 @@ public interface OrganizationDao {
      *
      * @param organization
      */
-    public void update(Organization organization);
+    void update(Organization organization);
 }

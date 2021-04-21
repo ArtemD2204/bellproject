@@ -12,34 +12,34 @@ import javax.validation.Valid;
 import java.util.List;
 
 /**
- * Сервис
+ * Сервис для работы с Office
  */
 @Validated
 public interface OfficeService {
 
     /**
-     * Получить список офисов
+     * Получить список всех офисов
      *
-     * @return {@OfficeDto}
+     * @return возвращает список всех офисов List<OfficeDto>
      */
     List<OfficeDto> allOffices();
 
     /**
      * Получить отфильтрованный список офисов
-     *
-     * @return {@List<OfficeDtoShort>}
+     * @param officeFilter - фильтр офисов
+     * @return возвращает отфильтрованный список офисов List<OfficeDtoShort>
      */
     List<OfficeDtoShort> getFilteredOfficeList(@Valid OfficeFilter officeFilter);
 
     /**
      * Получить Office по id
      *
-     * @return {OfficeDto}
+     * @return OfficeDto
      */
     OfficeDto getById(Long id);
 
     /**
-     * Добавить новый офис в БД
+     * Добавить новый офис
      *
      * @param officeDto
      */
@@ -47,7 +47,7 @@ public interface OfficeService {
     void add(@Valid OfficeDto officeDto);
 
     /**
-     * Обновить офис в БД
+     * Обновить офис
      *
      * @param officeDto
      */

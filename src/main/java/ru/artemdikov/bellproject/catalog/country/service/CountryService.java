@@ -5,15 +5,13 @@ import ru.artemdikov.bellproject.catalog.country.dto.CountryDto;
 import java.util.List;
 
 /**
- * Сервис
+ * Сервис для работы с Country
  */
-
 public interface CountryService {
 
     /**
-     * Получить список стран
-     *
-     * @return {@CountryDto}
+     * Получить список всех стран
+     * @return список стран
      */
     List<CountryDto> countries();
 

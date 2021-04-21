@@ -4,15 +4,27 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+/**
+ * Фильтр для Organization
+ */
 public class OrgFilter {
 
+    /**
+     * Название
+     */
     @NotEmpty(message = "name cannot be empty")
     @Size(max = 150)
     private String name;
 
+    /**
+     * ИНН
+     */
     @Size(max = 20)
     private String inn;
 
+    /**
+     * Активный
+     */
     private Boolean isActive;
 
     public String getName() {

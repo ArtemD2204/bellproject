@@ -11,37 +11,66 @@ import java.util.List;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
+/**
+ * Контроллер для работы с Organization
+ */
 @RestController
 @RequestMapping(value = "/api/organization", produces = APPLICATION_JSON_VALUE)
 public class OrganizationController {
 
     private final OrganizationService organizationService;
 
+    /**
+     * Конструктор
+     * @param organizationService
+     */
     @Autowired
     public OrganizationController(OrganizationService organizationService) {
         this.organizationService = organizationService;
     }
 
+    /**
+     * Сохранить новую организацию
+     * @param organization
+     */
     @PostMapping("/save")
-    public void saveOffice(@RequestBody OrgDto organization) {
+    public void saveOrganization(@RequestBody OrgDto organization) {
         organizationService.add(organization);
     }
 
+    /**
+     * Обновить организацию
+     * @param organization
+     */
     @PostMapping("/update")
-    public void updateOffice(@RequestBody OrgDto organization) {
+    public void updateOrganization(@RequestBody OrgDto organization) {
         organizationService.update(organization);
     }
 
+    /**
+     * Получить все организации
+     * @return
+     */
     @GetMapping("/all")
-    public List<OrgDto> allOffices() {
+    public List<OrgDto> allOrganizations() {
         return organizationService.allOrganizations();
     }
 
+    /**
+     * Получить организацию по id
+     * @param id - идентификатор
+     * @return OrgDto
+     */
     @GetMapping("/{id}")
-    public OrgDto office(@PathVariable Long id) {
+    public OrgDto getOrganization(@PathVariable Long id) {
         return organizationService.getById(id);
     }
 
+    /**
+     * Получить отфильтрованный список организаций
+     * @param orgFilter - фильтр организаций
+     * @return List<OrgDtoShort>
+     */
     @PostMapping("/list")
     public List<OrgDtoShort> list(@RequestBody OrgFilter orgFilter) {
         return organizationService.getFilteredOrganizationList(orgFilter);

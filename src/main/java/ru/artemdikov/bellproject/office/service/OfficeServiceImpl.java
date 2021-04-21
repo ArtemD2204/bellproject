@@ -26,6 +26,12 @@ public class OfficeServiceImpl implements OfficeService {
     private final OfficeDao dao;
     private final MapperFacade mapperFacade;
 
+    /**
+     * Конструктор
+     * @param organizationDao
+     * @param dao
+     * @param mapperFacade
+     */
     @Autowired
     public OfficeServiceImpl(OrganizationDao organizationDao, OfficeDao dao, MapperFacade mapperFacade) {
         this.organizationDao = organizationDao;
@@ -60,6 +66,7 @@ public class OfficeServiceImpl implements OfficeService {
             throw new EntityNotFoundException("Office not found for id=" + officeDto.getId() + ".");
         }
         mapDtoToModel(officeDto, office);
+        dao.update(office);
     }
 
     /**
@@ -75,6 +82,9 @@ public class OfficeServiceImpl implements OfficeService {
         return mapperFacade.mapAsList(all, OfficeDto.class);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional
     public List<OfficeDtoShort> getFilteredOfficeList(@Valid OfficeFilter officeFilter) {
@@ -85,6 +95,9 @@ public class OfficeServiceImpl implements OfficeService {
         return mapperFacade.mapAsList(officeList, OfficeDtoShort.class);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     @Transactional(readOnly = true)
     public OfficeDto getById(Long id) {

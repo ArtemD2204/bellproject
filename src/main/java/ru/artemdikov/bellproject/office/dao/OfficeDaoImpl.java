@@ -21,6 +21,10 @@ public class OfficeDaoImpl implements OfficeDao {
 
     private final EntityManager em;
 
+    /**
+     *
+     * @param em
+     */
     @Autowired
     public OfficeDaoImpl(EntityManager em) {
         this.em = em;
@@ -67,6 +71,15 @@ public class OfficeDaoImpl implements OfficeDao {
     public void save(Office office) {
         em.persist(office);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void update(Office office) {
+        em.merge(office);
+    }
+
 
     private CriteriaQuery<Office> buildCriteria(OfficeFilter officeFilter) {
         CriteriaBuilder builder = em.getCriteriaBuilder();

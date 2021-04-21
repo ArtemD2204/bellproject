@@ -13,6 +13,9 @@ import java.util.Date;
 @Table(name = "Document")
 public class Document {
 
+    /**
+     * Идентификатор
+     */
     @Id
     @Column(name = "doc_id")
     private Long id;
@@ -48,7 +51,6 @@ public class Document {
      */
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "doc_id", referencedColumnName = "user_id")
-//    @PrimaryKeyJoinColumn
     @MapsId
     private User user;
 
@@ -90,17 +92,5 @@ public class Document {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    @Override
-    public String toString() {
-        return "Document{" +
-                "id=" + id +
-                ", version=" + version +
-                ", docNumber='" + docNumber + '\'' +
-                ", docDate=" + docDate +
-                ", documentType=" + documentType +
-                ", user=" + user +
-                '}';
     }
 }

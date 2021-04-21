@@ -7,12 +7,15 @@ import ru.artemdikov.bellproject.office.model.Office;
 import javax.persistence.*;
 
 /**
- * Пользователь
+ * Класс entity для пользователя
  */
 @Entity
 @Table(name = "User")
 public class User {
 
+    /**
+     * Идентификатор
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")

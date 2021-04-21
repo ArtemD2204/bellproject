@@ -9,6 +9,9 @@ import javax.persistence.*;
 @Table(name = "Organization")
 public class Organization {
 
+    /**
+     * Идентификатор
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")

@@ -17,6 +17,9 @@ import javax.persistence.*;
 })
 public class Office {
 
+    /**
+     * Идентификатор
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")

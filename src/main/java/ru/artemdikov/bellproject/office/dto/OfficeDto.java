@@ -6,26 +6,47 @@ import ru.artemdikov.bellproject.validation.group.OnUpdate;
 
 import javax.validation.constraints.*;
 
+/**
+ * Офис DTO
+ */
 public class OfficeDto {
 
+    /**
+     * Идентификатор
+     */
     @Null(groups = OnCreate.class)
     @Min(value = 1, message = "id should not be less than 1", groups = OnUpdate.class)
     @NotNull(groups = OnUpdate.class)
     private Long id;
 
+    /**
+     * Название
+     */
     @Size(max = 150, groups = Default.class)
     @NotEmpty(message = "name cannot be null", groups = OnUpdate.class)
     private String name;
 
+    /**
+     * Адрес
+     */
     @Size(max = 255, groups = Default.class)
     @NotEmpty(message = "address cannot be null", groups = OnUpdate.class)
     private String address;
 
+    /**
+     * Телефон
+     */
     @Size(max = 30, groups = Default.class)
     private String phone;
 
+    /**
+     * Активный
+     */
     private Boolean isActive;
 
+    /**
+     * id организации
+     */
     @NotNull(message = "orgId can not be null", groups = OnCreate.class)
     @Null(message = "orgId can not be changed", groups = OnUpdate.class)
     private Long orgId;

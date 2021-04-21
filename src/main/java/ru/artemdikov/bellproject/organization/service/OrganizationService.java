@@ -12,34 +12,34 @@ import javax.validation.Valid;
 import java.util.List;
 
 /**
- * Сервис
+ * Сервис Organization
  */
 @Validated
 public interface OrganizationService {
 
     /**
-     * Получить список организаций
+     * Получить все организации
      *
-     * @return {@OrgDto}
+     * @return List<OrgDto>
      */
     List<OrgDto> allOrganizations();
 
     /**
      * Получить отфильтрованный список организаций
-     *
-     * @return {@List<OrgDtoShort>}
+     * @param orgFilter - фильтр организаций
+     * @return List<OrgDtoShort>
      */
     List<OrgDtoShort> getFilteredOrganizationList(@Valid OrgFilter orgFilter);
 
     /**
      * Получить Organization по id
-     *
-     * @return {OrgDto}
+     * @param id - идентификатор
+     * @return OrgDto
      */
     OrgDto getById(Long id);
 
     /**
-     * Добавить новую организацию в БД
+     * Добавить новую организацию
      *
      * @param orgDto
      */
@@ -47,7 +47,7 @@ public interface OrganizationService {
     void add(@Valid OrgDto orgDto);
 
     /**
-     * Обновить организацию в БД
+     * Обновить организацию
      *
      * @param orgDto
      */

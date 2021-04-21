@@ -13,6 +13,9 @@ import javax.annotation.PostConstruct;
  */
 @Service
 public class CustomMapperFactory implements FactoryBean<MapperFactory> {
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public MapperFactory getObject() {
         return new DefaultMapperFactory.Builder()
@@ -20,11 +23,17 @@ public class CustomMapperFactory implements FactoryBean<MapperFactory> {
                 .build();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Class<?> getObjectType() {
         return MapperFactory.class;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isSingleton() {
         return true;

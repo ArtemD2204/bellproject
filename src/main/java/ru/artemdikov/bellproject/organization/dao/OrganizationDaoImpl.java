@@ -18,11 +18,18 @@ import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * {@inheritDoc}
+ */
 @Repository
 public class OrganizationDaoImpl implements OrganizationDao {
 
     private final EntityManager em;
 
+    /**
+     * Конструктор
+     * @param em
+     */
     @Autowired
     public OrganizationDaoImpl(EntityManager em) {
         this.em = em;
@@ -45,6 +52,9 @@ public class OrganizationDaoImpl implements OrganizationDao {
         return em.find(Organization.class, id);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<Organization> loadByFilter(OrgFilter orgFilter) {
         CriteriaQuery<Organization> criteriaQuery = buildCriteria(orgFilter);

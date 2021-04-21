@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS Office (
 COMMENT ON TABLE Office IS 'Офис';
 
 CREATE TABLE IF NOT EXISTS User (
-    user_id              INTEGER                 COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT,
+    user_id         INTEGER                 COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT,
     version         INTEGER NOT NULL        COMMENT 'Служебное поле hibernate',
     first_name      VARCHAR(50) NOT NULL    COMMENT 'Имя',
     second_name     VARCHAR(50)             COMMENT 'Фамилия',
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS User (
 COMMENT ON TABLE User IS 'Пользователь';
 
 CREATE TABLE IF NOT EXISTS Document (
-    doc_id         INTEGER              COMMENT 'Уникальный идентификатор и foreign key на User' PRIMARY KEY,
+    doc_id     INTEGER              COMMENT 'Уникальный идентификатор и foreign key на User' PRIMARY KEY,
     version    INTEGER NOT NULL     COMMENT 'Служебное поле hibernate',
     doc_number VARCHAR(30)          COMMENT 'Номер документа',
     doc_date   DATE                 COMMENT 'Дата документа',
