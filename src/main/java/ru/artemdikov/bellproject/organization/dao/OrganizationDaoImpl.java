@@ -88,7 +88,6 @@ public class OrganizationDaoImpl implements OrganizationDao {
         if (isActive != null) {
             predicateList.add(builder.equal(organization.get("isActive"), isActive));
         }
-        criteria = criteria.where(predicateList.toArray(new Predicate[0]));
-        return criteria;
+        return criteria.where(predicateList.toArray(new Predicate[0]));
     }
 }

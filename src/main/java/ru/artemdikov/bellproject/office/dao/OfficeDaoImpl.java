@@ -95,8 +95,6 @@ public class OfficeDaoImpl implements OfficeDao {
         if (isActive != null) {
             predicateList.add(builder.equal(office.get("isActive"), isActive));
         }
-        Predicate[] predicates = new Predicate[0];
-        criteria = criteria.where(predicateList.toArray(predicates));
-        return criteria;
+        return criteria.where(predicateList.toArray(new Predicate[0]));
     }
 }

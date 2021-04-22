@@ -73,8 +73,7 @@ public class UserDaoImpl implements UserDao {
         CriteriaBuilder builder = em.getCriteriaBuilder();
         CriteriaQuery<User> criteriaQuery = builder.createQuery(User.class);
         Root<User> userRoot = criteriaQuery.from(User.class);
-        criteriaQuery = criteriaQuery.where(getPredicates(builder, userRoot, userFilter));
-        return criteriaQuery;
+        return criteriaQuery.where(getPredicates(builder, userRoot, userFilter));
     }
 
     private Predicate[] getPredicates(CriteriaBuilder builder, Root<User> userRoot, UserFilter userFilter) {
