@@ -37,7 +37,7 @@ public interface OfficeDao {
      * Получить отфильтрованный список объектов Office
      *
      * @param officeFilter - фильтры
-     * @return List<Office>
+     * @return возвращает отфильтрованный список офисов
      */
     List<Office> loadByFilter(OfficeFilter officeFilter);
 
@@ -51,7 +51,7 @@ public interface OfficeDao {
     /**
      * Обновить Office
      *
-     * @param office
+     * @param office - офис
      */
     public void update(Office office);
 }

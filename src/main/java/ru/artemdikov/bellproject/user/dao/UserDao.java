@@ -12,7 +12,7 @@ public interface UserDao {
     /**
      * Получить все объекты User
      *
-     * @return List<User>
+     * @return возвращает всех пользователей
      */
     List<User> all();
 
@@ -20,7 +20,7 @@ public interface UserDao {
      * Получить User по идентификатору
      *
      * @param id - идентификатор
-     * @return User
+     * @return возвращает пользователя
      */
     User loadById(Long id);
 
@@ -28,7 +28,7 @@ public interface UserDao {
      * Получить отфильтрованный список объектов User
      *
      * @param userFilter - фильтр пользователей
-     * @return List<User>
+     * @return возвращает отфильтрованный список пользователей
      */
     List<User> loadByFilter(UserFilter userFilter);
 

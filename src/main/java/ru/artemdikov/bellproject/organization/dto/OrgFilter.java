@@ -43,7 +43,7 @@ public class OrgFilter {
         this.inn = inn;
     }
 
-    public Boolean getActive() {
+    public Boolean getIsActive() {
         return isActive;
     }
 

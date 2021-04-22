@@ -14,7 +14,7 @@ import ru.artemdikov.bellproject.controller.advice.dto.ErrorDto;
 import ru.artemdikov.bellproject.controller.advice.dto.SuccessDto;
 
 /**
- * Сработать после выполнения методов контроллеров, но до записи ответа
+ * Срабатывает после выполнения методов контроллеров, но до записи ответа
  * и вносит изменения в объект ответа
  */
 @RestControllerAdvice

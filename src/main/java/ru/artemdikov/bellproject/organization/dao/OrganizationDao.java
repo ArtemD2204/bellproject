@@ -12,15 +12,15 @@ public interface OrganizationDao {
     /**
      * Получить все объекты Organization
      *
-     * @return
+     * @return возвращает все организации
      */
     List<Organization> all();
 
     /**
      * Получить Organization по идентификатору
      *
-     * @param id
-     * @return
+     * @param id - идентификатор
+     * @return возвращает организацию
      */
     Organization loadById(Long id);
 
@@ -28,7 +28,7 @@ public interface OrganizationDao {
      * Получить отфильтрованный список объектов Organization
      *
      * @param orgFilter
-     * @return
+     * @return возвращает отфильтрованный список организаций
      */
     List<Organization> loadByFilter(OrgFilter orgFilter);
 

@@ -20,21 +20,21 @@ public interface OfficeService {
     /**
      * Получить список всех офисов
      *
-     * @return возвращает список всех офисов List<OfficeDto>
+     * @return возвращает список всех офисов
      */
     List<OfficeDto> allOffices();
 
     /**
      * Получить отфильтрованный список офисов
      * @param officeFilter - фильтр офисов
-     * @return возвращает отфильтрованный список офисов List<OfficeDtoShort>
+     * @return возвращает отфильтрованный список офисов
      */
     List<OfficeDtoShort> getFilteredOfficeList(@Valid OfficeFilter officeFilter);
 
     /**
      * Получить Office по id
      *
-     * @return OfficeDto
+     * @return офис
      */
     OfficeDto getById(Long id);
 

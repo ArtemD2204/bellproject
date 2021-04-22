@@ -1,4 +1,4 @@
 /**
- * Предоставляет Entity класс для офиса
+ * Предоставляет entity класс для офиса
  */
 package ru.artemdikov.bellproject.office.model;

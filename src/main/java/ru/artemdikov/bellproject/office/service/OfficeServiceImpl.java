@@ -26,12 +26,6 @@ public class OfficeServiceImpl implements OfficeService {
     private final OfficeDao dao;
     private final MapperFacade mapperFacade;
 
-    /**
-     * Конструктор
-     * @param organizationDao
-     * @param dao
-     * @param mapperFacade
-     */
     @Autowired
     public OfficeServiceImpl(OrganizationDao organizationDao, OfficeDao dao, MapperFacade mapperFacade) {
         this.organizationDao = organizationDao;
@@ -118,8 +112,8 @@ public class OfficeServiceImpl implements OfficeService {
         if (dto.getPhone() != null) {
             office.setPhone(dto.getPhone());
         }
-        if (dto.getActive() != null) {
-            office.setActive(dto.getActive());
+        if (dto.getIsActive() != null) {
+            office.setIsActive(dto.getIsActive());
         }
     }
 }

@@ -1,6 +1,6 @@
 package ru.artemdikov.bellproject.user.model;
 
-import ru.artemdikov.bellproject.catalog.country.model.Country;
+import ru.artemdikov.bellproject.dictionary.country.model.Country;
 import ru.artemdikov.bellproject.document.model.Document;
 import ru.artemdikov.bellproject.office.model.Office;
 
@@ -85,10 +85,6 @@ public class User {
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getFirstName() {

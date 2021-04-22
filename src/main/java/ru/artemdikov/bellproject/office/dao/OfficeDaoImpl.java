@@ -21,10 +21,6 @@ public class OfficeDaoImpl implements OfficeDao {
 
     private final EntityManager em;
 
-    /**
-     *
-     * @param em
-     */
     @Autowired
     public OfficeDaoImpl(EntityManager em) {
         this.em = em;
@@ -95,7 +91,7 @@ public class OfficeDaoImpl implements OfficeDao {
         if (phone != null && !phone.isEmpty()) {
             predicateList.add(builder.equal(office.get("phone"), phone));
         }
-        Boolean isActive = officeFilter.getActive();
+        Boolean isActive = officeFilter.getIsActive();
         if (isActive != null) {
             predicateList.add(builder.equal(office.get("isActive"), isActive));
         }

@@ -20,10 +20,11 @@ public class ExceptionHandlerController {
     private final char MAX_DIGIT = 57;
 
     /**
-     * Обрабатывает исключения ru.artemdikov.bellproject.exception.EntityNotFoundException
-     * и javax.validation.ConstraintViolationException
+     * Обрабатывает исключения {@code ru.artemdikov.bellproject.exception.EntityNotFoundException}
+     * и {@code javax.validation.ConstraintViolationException}
      * @param e - необработаанное исключение
-     * @return возвращает ResponseEntity<ErrorDto>
+     * @return возвращает объект HTTP-ответа, состоящий из статуса, заголовков и тела,
+     * которое содержит {@code ErrorDto} объект
      */
     @ExceptionHandler({EntityNotFoundException.class, javax.validation.ConstraintViolationException.class})
     public ResponseEntity<ErrorDto> unhandledException(Exception e) {
@@ -42,7 +43,7 @@ public class ExceptionHandlerController {
     /**
      * Обрабатывает исключения, вызванные внутренними ошибками сервера
      * @param e - необработаанное исключение
-     * @return возвращает ErrorDto
+     * @return возвращает {@code ErrorDto} объект, хранящий поле с сообщением об ошибке
      */
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)

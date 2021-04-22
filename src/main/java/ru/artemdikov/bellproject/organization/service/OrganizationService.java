@@ -20,28 +20,28 @@ public interface OrganizationService {
     /**
      * Получить все организации
      *
-     * @return List<OrgDto>
+     * @return возвращает список всех организаций
      */
     List<OrgDto> allOrganizations();
 
     /**
      * Получить отфильтрованный список организаций
      * @param orgFilter - фильтр организаций
-     * @return List<OrgDtoShort>
+     * @return возвращает отфильтрованный список организаций
      */
     List<OrgDtoShort> getFilteredOrganizationList(@Valid OrgFilter orgFilter);
 
     /**
      * Получить Organization по id
      * @param id - идентификатор
-     * @return OrgDto
+     * @return возвращает организацию
      */
     OrgDto getById(Long id);
 
     /**
      * Добавить новую организацию
      *
-     * @param orgDto
+     * @param orgDto - организация
      */
     @Validated({OnCreate.class, Default.class})
     void add(@Valid OrgDto orgDto);
@@ -49,7 +49,7 @@ public interface OrganizationService {
     /**
      * Обновить организацию
      *
-     * @param orgDto
+     * @param orgDto - организация
      */
     @Validated({OnUpdate.class, Default.class})
     void update(@Valid OrgDto orgDto);

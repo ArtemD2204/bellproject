@@ -26,10 +26,6 @@ public class OrganizationDaoImpl implements OrganizationDao {
 
     private final EntityManager em;
 
-    /**
-     * Конструктор
-     * @param em
-     */
     @Autowired
     public OrganizationDaoImpl(EntityManager em) {
         this.em = em;
@@ -88,12 +84,11 @@ public class OrganizationDaoImpl implements OrganizationDao {
         if (inn != null && !inn.isEmpty()) {
             predicateList.add(builder.equal(organization.get("inn"), inn));
         }
-        Boolean isActive = orgFilter.getActive();
+        Boolean isActive = orgFilter.getIsActive();
         if (isActive != null) {
             predicateList.add(builder.equal(organization.get("isActive"), isActive));
         }
-        Predicate[] predicates = new Predicate[0];
-        criteria = criteria.where(predicateList.toArray(predicates));
+        criteria = criteria.where(predicateList.toArray(new Predicate[0]));
         return criteria;
     }
 }

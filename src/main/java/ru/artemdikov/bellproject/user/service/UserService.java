@@ -20,36 +20,36 @@ public interface UserService {
     /**
      * Получить список всех пользователей
      *
-     * @return List<UserDto>
+     * @return возвращает список всех пользователей
      */
     List<UserDto> allUsers();
 
     /**
      * Получить отфильтрованный список пользователей
      * @param userFilter - фильтр пользователей
-     * @return List<UserDtoShort>
+     * @return возвращает отфильтрованный список пользователей
      */
     List<UserDtoShort> filteredUserList(@Valid UserFilter userFilter);
 
     /**
-     * Получить User по id
+     * Получить пользователя по id
      * @param id - идентификатор
-     * @return UserDto
+     * @return возвращает пользователя
      */
     UserDto getById(Long id);
 
     /**
-     * Добавить нового User
+     * Добавить нового пользователя
      *
-     * @param userDto
+     * @param userDto - пользователь
      */
     @Validated({OnCreate.class, Default.class})
     void add(@Valid UserDto userDto);
 
     /**
-     * Обновить User
+     * Обновить пользователя
      *
-     * @param userDto
+     * @param userDto - пользователь
      */
     @Validated({OnUpdate.class, Default.class})
     void update(@Valid UserDto userDto);

@@ -12,7 +12,7 @@ import java.util.List;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 /**
- * Контроллер для работы с User
+ * Контроллер для работы с пользователями
  */
 @RestController
 @RequestMapping(value = "/api/user", produces = APPLICATION_JSON_VALUE)
@@ -20,10 +20,6 @@ public class UserController {
 
     private final UserService userService;
 
-    /**
-     * Конструктор
-     * @param userService
-     */
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
@@ -40,7 +36,7 @@ public class UserController {
 
     /**
      * Обновить пользователя
-     * @param user
+     * @param user - пользователь
      */
     @PostMapping("/update")
     public void updateUser(@RequestBody UserDto user) {
@@ -49,7 +45,7 @@ public class UserController {
 
     /**
      * Получить всех пользователей
-     * @return List<UserDto>
+     * @return возвращает список всех пользователей
      */
     @GetMapping("/all")
     public List<UserDto> allUsers() {
@@ -59,7 +55,7 @@ public class UserController {
     /**
      * Получить пользователя по id
      * @param id - идентификатор
-     * @return UserDto
+     * @return возвращает пользователя
      */
     @GetMapping("/{id}")
     public UserDto user(@PathVariable Long id) {
@@ -69,7 +65,7 @@ public class UserController {
     /**
      * Получить отфильтрованный список пользователей
      * @param userFilter - фильтр пользователей
-     * @return List<UserDtoShort>
+     * @return возвращает отфильтрованный список пользователей
      */
     @PostMapping("/list")
     public List<UserDtoShort> list(@RequestBody UserFilter userFilter) {

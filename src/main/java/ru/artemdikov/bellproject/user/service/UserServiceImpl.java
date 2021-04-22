@@ -3,10 +3,10 @@ package ru.artemdikov.bellproject.user.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.artemdikov.bellproject.catalog.country.model.Country;
-import ru.artemdikov.bellproject.catalog.country.repository.CountryRepository;
-import ru.artemdikov.bellproject.catalog.doc.model.DocumentType;
-import ru.artemdikov.bellproject.catalog.doc.repository.DocTypeRepository;
+import ru.artemdikov.bellproject.dictionary.country.model.Country;
+import ru.artemdikov.bellproject.dictionary.country.repository.CountryRepository;
+import ru.artemdikov.bellproject.dictionary.doc.model.DocumentType;
+import ru.artemdikov.bellproject.dictionary.doc.repository.DocTypeRepository;
 import ru.artemdikov.bellproject.document.model.Document;
 import ru.artemdikov.bellproject.exception.EntityNotFoundException;
 import ru.artemdikov.bellproject.model.mapper.MapperFacade;
@@ -35,14 +35,6 @@ public class UserServiceImpl implements UserService {
     private final CountryRepository countryRepository;
     private final DocTypeRepository docTypeRepository;
 
-    /**
-     * Конструктор
-     * @param dao
-     * @param mapperFacade
-     * @param officeDao
-     * @param countryRepository
-     * @param docTypeRepository
-     */
     @Autowired
     public UserServiceImpl(UserDao dao, MapperFacade mapperFacade, OfficeDao officeDao,
                            CountryRepository countryRepository, DocTypeRepository docTypeRepository) {
@@ -135,14 +127,7 @@ public class UserServiceImpl implements UserService {
         }
         mapOffice(userDto, user);
         mapCountry(userDto, user);
-        Document document;
-        if (user.getId() == null) { // если новый user
-            document = new Document();
-            user.addDocument(document);
-        } else {
-            document = user.getDocument();
-        }
-        updateDocument(userDto, document);
+        mapDocument(userDto, user);
     }
 
     private void mapOffice(UserDto userDto, User user) {
@@ -156,38 +141,28 @@ public class UserServiceImpl implements UserService {
     }
 
     private void mapCountry(UserDto userDto, User user) {
-        if (userDto.getCitizenshipCode() != null) {
-            Country country = countryRepository.findById(userDto.getCitizenshipCode()).orElse(null);
-            if (country == null) {
-                throw new EntityNotFoundException("Country not found for citizenshipCode="
-                        + userDto.getCitizenshipCode() + ".");
-            }
+        String code = userDto.getCitizenshipCode();
+        if (code != null) {
+            Country country = countryRepository.findById(code)
+                    .orElseThrow(() -> new EntityNotFoundException("Country not found for citizenshipCode=" + code + "."));
             user.setCountry(country);
         }
     }
 
+    private void mapDocument(UserDto userDto, User user) {
+        Document document;
+        if (user.getId() == null) { // если новый user
+            document = new Document();
+            user.addDocument(document);
+        } else {
+            document = user.getDocument();
+        }
+        updateDocument(userDto, document);
+    }
+
     private void updateDocument(UserDto userDto, Document document) {
-        DocumentType documentType;
-        String docCode = userDto.getDocCode();
-        String docName = userDto.getDocName();
-        if (docCode != null && docName != null) {
-            documentType = docTypeRepository.findByCodeAndName(docCode, docName);
-            if (documentType == null) {
-                throw new EntityNotFoundException("DocumentType not found for docCode=" + docCode
-                        + " and docName=" + docName + ".");
-            }
-            document.setDocumentType(documentType);
-        } else if (docCode != null) {
-            documentType = docTypeRepository.findById(docCode).orElse(null);
-            if (documentType == null) {
-                throw new EntityNotFoundException("DocumentType not found for docCode=" + docCode + ".");
-            }
-            document.setDocumentType(documentType);
-        } else if (docName != null) {
-            documentType = docTypeRepository.findByName(docName);
-            if (documentType == null) {
-                throw new EntityNotFoundException("DocumentType not found for docName=" + docName + ".");
-            }
+        DocumentType documentType = getDocumentType(userDto.getDocCode(), userDto.getDocName());
+        if (documentType != null) {
             document.setDocumentType(documentType);
         }
         if (userDto.getDocNumber() != null && !userDto.getDocNumber().isEmpty()) {
@@ -198,8 +173,27 @@ public class UserServiceImpl implements UserService {
             try {
                 document.setDocDate(dateFormat.parse(userDto.getDocDate()));
             } catch (ParseException e) {
-                throw new RuntimeException("userDto.docDate to user.document.docDate mapping error", e);
+                throw new ru.artemdikov.bellproject.exception.ParseException("userDto.docDate to user.document.docDate mapping error", e);
             }
         }
+    }
+
+    private DocumentType getDocumentType(String docCode, String docName) {
+        DocumentType documentType = null;
+        if (docCode != null && docName != null) {
+            documentType = docTypeRepository.findByCodeAndName(docCode, docName);
+            if (documentType == null) {
+                throw new EntityNotFoundException("DocumentType not found for docCode=" + docCode + " and docName=" + docName + ".");
+            }
+        } else if (docCode != null) {
+            documentType = docTypeRepository.findById(docCode)
+                    .orElseThrow(()->new EntityNotFoundException("DocumentType not found for docCode=" + docCode + "."));
+        } else if (docName != null) {
+            documentType = docTypeRepository.findByName(docName);
+            if (documentType == null) {
+                throw new EntityNotFoundException("DocumentType not found for docName=" + docName + ".");
+            }
+        }
+        return documentType;
     }
 }

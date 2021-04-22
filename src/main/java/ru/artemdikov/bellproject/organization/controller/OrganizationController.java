@@ -12,7 +12,7 @@ import java.util.List;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 /**
- * Контроллер для работы с Organization
+ * Контроллер для работы с организациями
  */
 @RestController
 @RequestMapping(value = "/api/organization", produces = APPLICATION_JSON_VALUE)
@@ -20,10 +20,6 @@ public class OrganizationController {
 
     private final OrganizationService organizationService;
 
-    /**
-     * Конструктор
-     * @param organizationService
-     */
     @Autowired
     public OrganizationController(OrganizationService organizationService) {
         this.organizationService = organizationService;
@@ -49,7 +45,7 @@ public class OrganizationController {
 
     /**
      * Получить все организации
-     * @return
+     * @return возвращает все организации
      */
     @GetMapping("/all")
     public List<OrgDto> allOrganizations() {
@@ -59,7 +55,7 @@ public class OrganizationController {
     /**
      * Получить организацию по id
      * @param id - идентификатор
-     * @return OrgDto
+     * @return возвращает организацию
      */
     @GetMapping("/{id}")
     public OrgDto getOrganization(@PathVariable Long id) {
@@ -69,7 +65,7 @@ public class OrganizationController {
     /**
      * Получить отфильтрованный список организаций
      * @param orgFilter - фильтр организаций
-     * @return List<OrgDtoShort>
+     * @return возвращает отфильтрованный список организаций
      */
     @PostMapping("/list")
     public List<OrgDtoShort> list(@RequestBody OrgFilter orgFilter) {

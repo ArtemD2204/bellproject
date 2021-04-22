@@ -1,6 +1,6 @@
 package ru.artemdikov.bellproject.document.model;
 
-import ru.artemdikov.bellproject.catalog.doc.model.DocumentType;
+import ru.artemdikov.bellproject.dictionary.doc.model.DocumentType;
 import ru.artemdikov.bellproject.user.model.User;
 
 import javax.persistence.*;
@@ -56,10 +56,6 @@ public class Document {
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getDocNumber() {

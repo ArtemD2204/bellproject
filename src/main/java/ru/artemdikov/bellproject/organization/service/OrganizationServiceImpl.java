@@ -23,11 +23,6 @@ public class OrganizationServiceImpl implements OrganizationService {
     private final OrganizationDao dao;
     private final MapperFacade mapperFacade;
 
-    /**
-     * Конструктор
-     * @param dao
-     * @param mapperFacade
-     */
     @Autowired
     public OrganizationServiceImpl(OrganizationDao dao, MapperFacade mapperFacade) {
         this.dao = dao;

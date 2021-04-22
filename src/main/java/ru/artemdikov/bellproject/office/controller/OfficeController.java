@@ -21,10 +21,6 @@ public class OfficeController {
 
     private final OfficeService officeService;
 
-    /**
-     * Конструктор
-     * @param officeService - сервис
-     */
     @Autowired
     public OfficeController(OfficeService officeService) {
         this.officeService = officeService;
@@ -70,7 +66,7 @@ public class OfficeController {
     /**
      * Получить отфильтрованный список офисов
      * @param officeFilter - фильтры
-     * @return возвращает список офисов
+     * @return возвращает отфильтрованный список офисов
      */
     @PostMapping("/list")
     public List<OfficeDtoShort> list(@RequestBody OfficeFilter officeFilter) {

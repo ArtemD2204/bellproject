@@ -18,10 +18,6 @@ public class UserDaoImpl implements UserDao {
 
     private final EntityManager em;
 
-    /**
-     * Конструктор
-     * @param em
-     */
     @Autowired
     public UserDaoImpl(EntityManager em) {
         this.em = em;
@@ -75,36 +71,39 @@ public class UserDaoImpl implements UserDao {
 
     private CriteriaQuery<User> buildCriteria(UserFilter userFilter) {
         CriteriaBuilder builder = em.getCriteriaBuilder();
-        CriteriaQuery<User> criteria = builder.createQuery(User.class);
-        Root<User> user = criteria.from(User.class);
+        CriteriaQuery<User> criteriaQuery = builder.createQuery(User.class);
+        Root<User> userRoot = criteriaQuery.from(User.class);
+        criteriaQuery = criteriaQuery.where(getPredicates(builder, userRoot, userFilter));
+        return criteriaQuery;
+    }
+
+    private Predicate[] getPredicates(CriteriaBuilder builder, Root<User> userRoot, UserFilter userFilter) {
         List<Predicate> predicateList = new ArrayList<>();
-        predicateList.add(builder.equal(user.get("office").get("id"), userFilter.getOfficeId()));
+        predicateList.add(builder.equal(userRoot.get("office").get("id"), userFilter.getOfficeId()));
         String firstName = userFilter.getFirstName();
         if (firstName != null && !firstName.isEmpty()) {
-            predicateList.add(builder.equal(user.get("firstName"), firstName));
+            predicateList.add(builder.equal(userRoot.get("firstName"), firstName));
         }
         String secondName = userFilter.getSecondName();
         if (secondName != null && !secondName.isEmpty()) {
-            predicateList.add(builder.equal(user.get("secondName"), secondName));
+            predicateList.add(builder.equal(userRoot.get("secondName"), secondName));
         }
         String middleName = userFilter.getMiddleName();
         if (middleName != null && !middleName.isEmpty()) {
-            predicateList.add(builder.equal(user.get("middleName"), middleName));
+            predicateList.add(builder.equal(userRoot.get("middleName"), middleName));
         }
         String position = userFilter.getPosition();
         if (position != null && !position.isEmpty()) {
-            predicateList.add(builder.equal(user.get("position"), position));
+            predicateList.add(builder.equal(userRoot.get("position"), position));
         }
         String docCode = userFilter.getDocCode();
         if (docCode != null && !docCode.isEmpty()) {
-            predicateList.add(builder.equal(user.get("document").get("documentType").get("code"), docCode));
+            predicateList.add(builder.equal(userRoot.get("document").get("documentType").get("code"), docCode));
         }
         String citizenshipCode = userFilter.getCitizenshipCode();
         if (citizenshipCode != null && !citizenshipCode.isEmpty()) {
-            predicateList.add(builder.equal(user.get("country").get("code"), citizenshipCode));
+            predicateList.add(builder.equal(userRoot.get("country").get("code"), citizenshipCode));
         }
-        Predicate[] predicates = new Predicate[0];
-        criteria = criteria.where(predicateList.toArray(predicates));
-        return criteria;
+        return predicateList.toArray(new Predicate[0]);
     }
 }
