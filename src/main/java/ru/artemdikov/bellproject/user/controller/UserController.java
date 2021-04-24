@@ -48,7 +48,7 @@ public class UserController {
      * @return возвращает список всех пользователей
      */
     @GetMapping("/all")
-    public List<UserDto> allUsers() {
+    public List<UserDto> getAllUsers() {
         return userService.allUsers();
     }
 
@@ -58,7 +58,7 @@ public class UserController {
      * @return возвращает пользователя
      */
     @GetMapping("/{id}")
-    public UserDto user(@PathVariable Long id) {
+    public UserDto getUser(@PathVariable Long id) {
         return userService.getById(id);
     }
 
@@ -68,7 +68,7 @@ public class UserController {
      * @return возвращает отфильтрованный список пользователей
      */
     @PostMapping("/list")
-    public List<UserDtoShort> list(@RequestBody UserFilter userFilter) {
+    public List<UserDtoShort> getList(@RequestBody UserFilter userFilter) {
         return userService.filteredUserList(userFilter);
     }
 }
