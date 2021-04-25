@@ -23,7 +23,7 @@ mvn spring-boot:run
 
 
 А в случае ошибки возвратит
-```json
+```
 {
     "error":"текст ошибки"
 }
@@ -35,7 +35,7 @@ api/organization/list
 method:POST
 
 In (фильтр в body запроса):
-```json
+```
 {
   "name":"", //обязательный параметр
   "inn":"",
@@ -43,7 +43,7 @@ In (фильтр в body запроса):
 }
 ```
 Out:
-```json
+```
 {
     "data": [
         {
@@ -57,7 +57,7 @@ Out:
 ```
 Пример  
 In:
-```json
+```
 {
    "name": "IBM",
    "inn": "1234",
@@ -65,7 +65,7 @@ In:
 }
 ```
 Out:
-```json
+```
 {
     "data": [
         {
@@ -86,7 +86,7 @@ api/organization/{id}
 method:GET
 
 Out:
-```json
+```
 {
     "data":{
         "id":"",
@@ -103,7 +103,7 @@ Out:
 Пример  
 url: http://localhost:8888/api/organization/5  
 Out:
-```json
+```
 {
     "data": {
         "id": 5,
@@ -122,7 +122,7 @@ method:GET
 /api/organization/all
 
 Out:
-```json
+```
 {
     "data": [
         {
@@ -144,7 +144,7 @@ method:POST
 api/organization/update
 
 In:
-```json
+```
 {
     "id":"", //обязательный параметр
     "name":"", //обязательный параметр
@@ -157,14 +157,14 @@ In:
 }
 ```
 Out:
-```json
+```
 {
     "result":"success"
 }
 ```
 Пример  
 In:
-```json
+```
 {
     "id": 4,
     "name": "SAP",
@@ -176,7 +176,7 @@ In:
 }
 ```
 Out:
-```json
+```
 {
     "result": "success"
 }
@@ -186,7 +186,7 @@ method:POST
 api/organization/save
 
 In:
-```json
+```
 {
     "name":"", //обязательный параметр
     "fullName":"", //обязательный параметр
@@ -198,14 +198,14 @@ In:
 }
 ```
 Out:
-```json
+```
 {
     "result":"success"
 }
 ```
 Примет  
 In:
-```json
+```
 {
     "name": "SAP",
     "fullName": "Systemanalyse und Programmentwicklung",
@@ -217,7 +217,7 @@ In:
 }
 ```
 Out:
-```json
+```
 {
     "result": "success"
 }
@@ -227,7 +227,7 @@ method:POST
 api/office/list
 
 In (фильтр в body запроса):
-```json
+```
 {
   "orgId":"", //обязательный параметр
   "name":"",
@@ -236,7 +236,7 @@ In (фильтр в body запроса):
 }
 ```
 Out:
-```json
+```
 {
     "data": [
         {
@@ -250,7 +250,7 @@ Out:
 ```
 Пример  
 In:
-```json
+```
 {
     "orgId": 1,
     "name":"IBM main office",
@@ -259,7 +259,7 @@ In:
 }
 ```
 Out:
-```json
+```
 {
     "data": [
         {
@@ -275,7 +275,7 @@ api/office/{id}
 method:GET
 
 Out:
-```json
+```
 {
     "data": {
         "id":"",
@@ -290,7 +290,7 @@ Out:
 Пример  
 url: http://localhost:8888/api/office/4  
 Out:
-```json
+```
 {
     "data": {
         "id": 4,
@@ -307,7 +307,7 @@ method:GET
 http://localhost:8888/api/office/all
 
 Out:
-```json
+```
 {
     "data": [
         {
@@ -327,7 +327,7 @@ method:POST
 api/office/update
 
 In:
-```json
+```
 {
   "id":"", //обязательный параметр
   "name":"", //обязательный параметр
@@ -337,14 +337,14 @@ In:
 }
 ```
 Out:
-```json
+```
 {
     "result":"success"
 }
 ```
 Пример  
 In:
-```json
+```
 {
     "id": 6,
     "name": "Oracle office",
@@ -354,7 +354,7 @@ In:
 }
 ```
 Out:
-```json
+```
 {
     "result": "success"
 }
@@ -364,7 +364,7 @@ method:POST
 api/office/save
 
 In:
-```json
+```
 {
     "orgId":"", //обязательный параметр
     "name":"",
@@ -374,14 +374,14 @@ In:
 }
 ```
 Out:
-```json
+```
 {
     "result":"success"
 }
 ```
 Пример  
 In:
-```json
+```
 {
     "orgId": 2,
     "name": "Oracle office",
@@ -391,7 +391,7 @@ In:
 }
 ```
 Out:
-```json
+```
 {
     "result": "success"
 }
@@ -402,7 +402,7 @@ method: POST
 api/user/list
 
 In (фильтр):
-```json
+```
 {
     "officeId":"", //обязательный параметр
     "firstName":"",
@@ -414,7 +414,7 @@ In (фильтр):
 }
 ```
 Out:
-```json
+```
 {
     "data": [
         {
@@ -430,7 +430,7 @@ Out:
 ```
 Пример  
 In:
-```json
+```
 {
     "officeId": 1,
     "firstName": "Пётр",
@@ -442,7 +442,7 @@ In:
 }
 ```
 Out:
-```json
+```
 {
     "data": [
         {
@@ -467,7 +467,7 @@ api/user/{id}
 method:GET
 
 Out:
-```json
+```
 {
     data: {
         "id":"",
@@ -488,7 +488,7 @@ Out:
 Пример  
 url: http://localhost:8888/api/user/3  
 Out:
-```json
+```
 {
     "data": {
         "id": 3,
@@ -513,7 +513,7 @@ method:GET
 http://localhost:8888/api/user/all
 
 Out:
-```json
+```
 {
     "data": [
         {
@@ -541,7 +541,7 @@ method: POST
 api/user/update
 
 In:
-```json
+```
 {
     "id":"", //обязательный параметр
     "officeId":"",
@@ -558,14 +558,14 @@ In:
 }
 ```
 Out:
-```json
+```
 {
     "result":"success"
 }
 ```
 Пример  
 In:
-```json
+```
 {
     "id": 4,
     "officeId": 3,
@@ -582,7 +582,7 @@ In:
 }
 ```
 Out:
-```json
+```
 {
     "result": "success"
 }
@@ -592,7 +592,7 @@ method: POST
 api/user/save
 
 In:
-```json
+```
 {
     "officeId":"", //обязательный параметр
     "firstName":"", //обязательный параметр
@@ -609,14 +609,14 @@ In:
 }
 ```
 Out:
-```json
+```
 {
     "result": "success"
 }
 ```
 Пример  
 In:
-```json
+```
 {
     "officeId": 4,
     "firstName": "Александр",
@@ -633,7 +633,7 @@ In:
 }
 ```
 Out:
-```json
+```
 {
     "result": "success"
 }
@@ -643,7 +643,7 @@ method: GET
 /api/docs
 
 Out:
-```json
+```
 {
     "data": [
         {
@@ -667,7 +667,7 @@ method: GET
 /api/countries
 
 Out:
-```json
+```
 {
     "data": [
         {
