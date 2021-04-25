@@ -101,7 +101,7 @@ Out:
 }
 ```
 Пример  
-url: http://localhost:8888/api/organization/5  
+/api/organization/5  
 Out:
 ```
 {
@@ -288,7 +288,7 @@ Out:
 }
 ```
 Пример  
-url: http://localhost:8888/api/office/4  
+/api/office/4  
 Out:
 ```
 {
@@ -304,7 +304,7 @@ Out:
 ```
 #### 8. Получить все офисы
 method:GET  
-http://localhost:8888/api/office/all
+/api/office/all
 
 Out:
 ```
@@ -486,7 +486,7 @@ Out:
 }
 ```
 Пример  
-url: http://localhost:8888/api/user/3  
+/api/user/3  
 Out:
 ```
 {
@@ -510,7 +510,7 @@ Out:
 ```
 #### 13. Получить всех пользователей
 method:GET  
-http://localhost:8888/api/user/all
+/api/user/all
 
 Out:
 ```
