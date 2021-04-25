@@ -408,7 +408,7 @@ In (фильтр):
     "firstName":"",
     "lastName":"",
     "middleName":"",
-    "position","",
+    "position":"",
     "docCode":"",
     "citizenshipCode":""
 }
@@ -418,7 +418,7 @@ Out:
 {
     "data": [
         {
-            "id": """,
+            "id": "",
             "firstName": "",
             "secondName": "",
             "middleName": "",
@@ -474,8 +474,8 @@ Out:
         "firstName":"",
         "secondName":"",
         "middleName":"",
-        "position":""
-        "phone","",
+        "position":"",
+        "phone":"",
         "docName":"",
         "docNumber":"",
         "docDate":"",
@@ -548,8 +548,8 @@ In:
     "firstName":"", //обязательный параметр
     "secondName":"",
     "middleName":"",
-    "position":"" //обязательный параметр
-    "phone","",
+    "position":"", //обязательный параметр
+    "phone":"",
     "docName":"",
     "docNumber":"",
     "docDate":"",
@@ -598,8 +598,8 @@ In:
     "firstName":"", //обязательный параметр
     "secondName":"",
     "middleName":"",
-    "position":"" //обязательный параметр
-    "phone","",
+    "position":"", //обязательный параметр
+    "phone":"",
     "docCode":"",
     "docName":"",
     "docNumber":"",
