@@ -1,11 +1,11 @@
 # Project
 
-Для того, чтобы клонировать репозиторий по SSH, необходимо выполнить в консоли следующую команду
-git clone git@github.com:ArtemD2204/bellproject.git
-Чтобы клонировать репозиторий по HTTPS, необходимо выполнить
+Для того, чтобы клонировать репозиторий по SSH, необходимо выполнить в консоли следующую команду  
+git clone git@github.com:ArtemD2204/bellproject.git  
+Чтобы клонировать репозиторий по HTTPS, необходимо выполнить  
 git clone https://github.com/ArtemD2204/bellproject.git
 
-Для запуска приложения необходимо в консоли перейти в папку с проектом и выполнить
+Для запуска приложения необходимо в консоли перейти в папку с проектом и выполнить  
 mvn spring-boot:run
 
 Проект будет доступен по url: http://localhost:8888
@@ -13,33 +13,37 @@ mvn spring-boot:run
 Все описанные возвращаемые данные находятся в параметре data. В случае ошибки возвращается параметр error.
 
 Например, в случае, если запрос корректно отработает, бэк возвратит данные в body ответа:
-
+```json
 {
     "data":{
         // возвращаемые данные
     }
 }
+```
+
 
 А в случае ошибки возвратит
-
+```json
 {
     "error":"текст ошибки"
 }
+```
+## Запросы
 
-Запросы:
-
-1. Получить отфильтрованный список организаций
-api/organization/list
+#### 1. Получить отфильтрованный список организаций
+api/organization/list  
 method:POST
 
 In (фильтр в body запроса):
+```json
 {
   "name":"", //обязательный параметр
   "inn":"",
   "isActive":""
 }
-
+```
 Out:
+```json
 {
     "data": [
         {
@@ -50,15 +54,18 @@ Out:
         ...
     ]
 }
-
-Пример
+```
+Пример  
 In:
+```json
 {
    "name": "IBM",
    "inn": "1234",
    "isActive": ""
 }
+```
 Out:
+```json
 {
     "data": [
         {
@@ -73,12 +80,13 @@ Out:
         }
     ]
 }
-
-2. Получить организацию по id
-api/organization/{id}
+```
+#### 2. Получить организацию по id
+api/organization/{id}  
 method:GET
 
 Out:
+```json
 {
     "data":{
         "id":"",
@@ -91,10 +99,11 @@ Out:
         "isActive": true
     }
 }
-
-Пример
-url: http://localhost:8888/api/organization/5
+```
+Пример  
+url: http://localhost:8888/api/organization/5  
 Out:
+```json
 {
     "data": {
         "id": 5,
@@ -107,12 +116,13 @@ Out:
         "isActive": true
     }
 }
-
-3. Получить все организации
-method:GET
-http://localhost:8888/api/organization/all
+```
+#### 3. Получить все организации
+method:GET  
+/api/organization/all
 
 Out:
+```json
 {
     "data": [
         {
@@ -128,12 +138,13 @@ Out:
         ...
     ]
 }
-
-4. Обновить организацию
-method:POST
+```
+#### 4. Обновить организацию
+method:POST  
 api/organization/update
 
 In:
+```json
 {
     "id":"", //обязательный параметр
     "name":"", //обязательный параметр
@@ -144,13 +155,16 @@ In:
     "phone","",
     "isActive":"true"
 }
+```
 Out:
+```json
 {
     "result":"success"
 }
-
-Пример
+```
+Пример  
 In:
+```json
 {
     "id": 4,
     "name": "SAP",
@@ -160,16 +174,19 @@ In:
     "address": "ул.К.Маркса, 11",
     "isActive": true
 }
+```
 Out:
+```json
 {
     "result": "success"
 }
-
-5. Сохранить новую организацию
-method:POST
+```
+#### 5. Сохранить новую организацию
+method:POST  
 api/organization/save
 
 In:
+```json
 {
     "name":"", //обязательный параметр
     "fullName":"", //обязательный параметр
@@ -179,14 +196,16 @@ In:
     "phone","",
     "isActive":"true"
 }
-
+```
 Out:
+```json
 {
     "result":"success"
 }
-
-Примет
+```
+Примет  
 In:
+```json
 {
     "name": "SAP",
     "fullName": "Systemanalyse und Programmentwicklung",
@@ -196,24 +215,28 @@ In:
     "phone": "8-123-456-78-90",
     "isActive": true
 }
+```
 Out:
+```json
 {
     "result": "success"
 }
-
-6. Получить отфильтрованный список офисов
-method:POST
+```
+#### 6. Получить отфильтрованный список офисов
+method:POST  
 api/office/list
 
 In (фильтр в body запроса):
+```json
 {
   "orgId":"", //обязательный параметр
   "name":"",
   "phone":"",
   "isActive" 
 }
-
+```
 Out:
+```json
 {
     "data": [
         {
@@ -224,16 +247,19 @@ Out:
         ...
     ]
 }
-
-Пример
+```
+Пример  
 In:
+```json
 {
     "orgId": 1,
     "name":"IBM main office",
     "phone":"123-456-789",
     "isActive": true
 }
+```
 Out:
+```json
 {
     "data": [
         {
@@ -243,12 +269,13 @@ Out:
         }
     ]
 }
-
-7. Получить офис по id
-api/office/{id}
+```
+#### 7. Получить офис по id
+api/office/{id}  
 method:GET
 
 Out:
+```json
 {
     "data": {
         "id":"",
@@ -259,10 +286,11 @@ Out:
         "orgId"
     }
 }
-
-Пример
-url: http://localhost:8888/api/office/4
+```
+Пример  
+url: http://localhost:8888/api/office/4  
 Out:
+```json
 {
     "data": {
         "id": 4,
@@ -273,12 +301,13 @@ Out:
         "orgId": 3
     }
 }
-
-8. Получить все офисы
-method:GET
+```
+#### 8. Получить все офисы
+method:GET  
 http://localhost:8888/api/office/all
 
 Out:
+```json
 {
     "data": [
         {
@@ -292,12 +321,13 @@ Out:
         ...
     ]
 }
-
-9. Обновить офис
-method:POST
+```
+#### 9. Обновить офис
+method:POST  
 api/office/update
 
 In:
+```json
 {
   "id":"", //обязательный параметр
   "name":"", //обязательный параметр
@@ -305,13 +335,16 @@ In:
   "phone","",
   "isActive": true //пример
 }
+```
 Out:
+```json
 {
     "result":"success"
 }
-
-Пример
+```
+Пример  
 In:
+```json
 {
     "id": 6,
     "name": "Oracle office",
@@ -319,16 +352,19 @@ In:
     "phone": "8-985-4568",
     "isActive": true
 }
+```
 Out:
+```json
 {
     "result": "success"
 }
-
-10. Сохранить новый офис
-method:POST
+```
+#### 10. Сохранить новый офис
+method:POST  
 api/office/save
 
 In:
+```json
 {
     "orgId":"", //обязательный параметр
     "name":"",
@@ -336,14 +372,16 @@ In:
     "phone","",
     "isActive":"true" // пример
 }
-
+```
 Out:
+```json
 {
     "result":"success"
 }
-
-Пример
+```
+Пример  
 In:
+```json
 {
     "orgId": 2,
     "name": "Oracle office",
@@ -351,17 +389,20 @@ In:
     "phone": "+7-123-4567",
     "isActive": true
 }
+```
 Out:
+```json
 {
     "result": "success"
 }
+```
 
-
-11. Получить отфильтрованный список пользователей
-method: POST
+#### 11. Получить отфильтрованный список пользователей
+method: POST  
 api/user/list
 
 In (фильтр):
+```json
 {
     "officeId":"", //обязательный параметр
     "firstName":"",
@@ -371,7 +412,9 @@ In (фильтр):
     "docCode":"",
     "citizenshipCode":""
 }
+```
 Out:
+```json
 {
     "data": [
         {
@@ -384,8 +427,10 @@ Out:
         ...
     ]
 }
-Пример
+```
+Пример  
 In:
+```json
 {
     "officeId": 1,
     "firstName": "Пётр",
@@ -395,7 +440,9 @@ In:
     "docCode": "21",
     "citizenshipCode": "643"
 }
+```
 Out:
+```json
 {
     "data": [
         {
@@ -414,12 +461,13 @@ Out:
         }
     ]
 }
-
-12. Получить пользователя по id
-api/user/{id}
+```
+#### 12. Получить пользователя по id
+api/user/{id}  
 method:GET
 
 Out:
+```json
 {
     data: {
         "id":"",
@@ -436,10 +484,11 @@ Out:
         "isIdentified":"true"
     }
 }
-
-Пример
-url: http://localhost:8888/api/user/3
-out:
+```
+Пример  
+url: http://localhost:8888/api/user/3  
+Out:
+```json
 {
     "data": {
         "id": 3,
@@ -458,12 +507,13 @@ out:
         "identified": true
     }
 }
-
-13. Получить всех пользователей
-method:GET
+```
+#### 13. Получить всех пользователей
+method:GET  
 http://localhost:8888/api/user/all
 
 Out:
+```json
 {
     "data": [
         {
@@ -485,12 +535,13 @@ Out:
         ...
     ]
 }
-
-14. Обновить пользователя
-method: POST
+```
+#### 14. Обновить пользователя
+method: POST  
 api/user/update
 
 In:
+```json
 {
     "id":"", //обязательный параметр
     "officeId":"",
@@ -505,14 +556,16 @@ In:
     "citizenshipCode":"",
     "isIdentified":"true" //пример
 }
-
+```
 Out:
+```json
 {
     "result":"success"
 }
-
-Пример
+```
+Пример  
 In:
+```json
 {
     "id": 4,
     "officeId": 3,
@@ -527,16 +580,19 @@ In:
     "citizenshipCode": "643",
     "isIdentified":"true"
 }
+```
 Out:
+```json
 {
     "result": "success"
 }
-
-15. Сохранить нового пользователя
-method: POST
+```
+#### 15. Сохранить нового пользователя
+method: POST  
 api/user/save
 
 In:
+```json
 {
     "officeId":"", //обязательный параметр
     "firstName":"", //обязательный параметр
@@ -551,13 +607,16 @@ In:
     "citizenshipCode":"",
     "isIdentified":"true" //пример
 }
+```
 Out:
+```json
 {
     "result": "success"
 }
-
-Пример
+```
+Пример  
 In:
+```json
 {
     "officeId": 4,
     "firstName": "Александр",
@@ -572,16 +631,19 @@ In:
     "citizenshipCode": "643",
     "isIdentified":"true"
 }
+```
 Out:
+```json
 {
     "result": "success"
 }
-
-16. Справочник типов документов. Получить все типы документов
-method: GET
+```
+#### 16. Справочник типов документов. Получить все типы документов
+method: GET  
 /api/docs
 
 Out:
+```json
 {
     "data": [
         {
@@ -599,12 +661,13 @@ Out:
         ...
     ]
 }
-
-17. Справочник стран. Получить все страны
-method: GET
+```
+#### 17. Справочник стран. Получить все страны
+method: GET  
 /api/countries
 
 Out:
+```json
 {
     "data": [
         {
@@ -618,3 +681,4 @@ Out:
         ...
     ]
 }
+```
