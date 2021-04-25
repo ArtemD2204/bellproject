@@ -95,7 +95,7 @@ Out:
         "inn":"",
         "kpp":"",
         "address":"",
-        "phone","",
+        "phone":"",
         "isActive": true
     }
 }
