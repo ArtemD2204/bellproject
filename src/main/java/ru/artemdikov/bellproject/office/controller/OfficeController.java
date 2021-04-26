@@ -49,7 +49,7 @@ public class OfficeController {
      * @return возвращает список всех офисов
      */
     @GetMapping("/all")
-    public List<OfficeDto> allOffices() {
+    public List<OfficeDto> getAllOffices() {
         return officeService.allOffices();
     }
 
@@ -59,7 +59,7 @@ public class OfficeController {
      * @return возвращает офис
      */
     @GetMapping("/{id}")
-    public OfficeDto office(@PathVariable Long id) {
+    public OfficeDto getOffice(@PathVariable Long id) {
         return officeService.getById(id);
     }
 
@@ -69,7 +69,7 @@ public class OfficeController {
      * @return возвращает отфильтрованный список офисов
      */
     @PostMapping("/list")
-    public List<OfficeDtoShort> list(@RequestBody OfficeFilter officeFilter) {
+    public List<OfficeDtoShort> getList(@RequestBody OfficeFilter officeFilter) {
         return officeService.getFilteredOfficeList(officeFilter);
     }
 }

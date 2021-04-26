@@ -28,9 +28,10 @@ public class UserControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
+    private final ObjectMapper objectMapper = new ObjectMapper();
+
     @Test
     public void saveUserTest() throws Exception {
-        ObjectMapper objectMapper = new ObjectMapper();
         UserDto userDto = new UserDto();
         userDto.setOfficeId(1L);
         userDto.setFirstName("Ivan");
@@ -45,7 +46,6 @@ public class UserControllerTest {
 
     @Test
     public void updateUserTest() throws Exception {
-        ObjectMapper objectMapper = new ObjectMapper();
         UserDto userDto = new UserDto();
         userDto.setId(1L);
         userDto.setFirstName("Ivan");
@@ -60,7 +60,6 @@ public class UserControllerTest {
 
     @Test
     public void getAllUsersTest() throws Exception {
-        ObjectMapper objectMapper = new ObjectMapper();
         DataDto expectedData = new DataDto();
         expectedData.setData(userService.allUsers());
         String expectedDataString = objectMapper.writeValueAsString(expectedData);
@@ -70,7 +69,6 @@ public class UserControllerTest {
 
     @Test
     public void getUserTest() throws Exception {
-        ObjectMapper objectMapper = new ObjectMapper();
         Long userId = 1L;
         DataDto expectedData = new DataDto();
         expectedData.setData(userService.getById(userId));
@@ -81,7 +79,6 @@ public class UserControllerTest {
 
     @Test
     public void getListTest() throws Exception {
-        ObjectMapper objectMapper = new ObjectMapper();
         UserFilter userFilter = new UserFilter();
         userFilter.setOfficeId(1L);
         String userFilterString = objectMapper.writeValueAsString(userFilter);

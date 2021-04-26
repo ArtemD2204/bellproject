@@ -28,8 +28,8 @@ public class CountryController {
      * Вернуть список всех стран
      * @return возвращает список всех стран
      */
-    @GetMapping("")
-    public List<CountryDto> allCountries() {
+    @GetMapping
+    public List<CountryDto> getAllCountries() {
         return countryService.countries();
     }
 }

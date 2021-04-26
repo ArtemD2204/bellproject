@@ -48,7 +48,7 @@ public class OrganizationController {
      * @return возвращает все организации
      */
     @GetMapping("/all")
-    public List<OrgDto> allOrganizations() {
+    public List<OrgDto> getAllOrganizations() {
         return organizationService.allOrganizations();
     }
 

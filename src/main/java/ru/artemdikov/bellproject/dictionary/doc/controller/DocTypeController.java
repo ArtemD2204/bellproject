@@ -30,8 +30,8 @@ public class DocTypeController {
      * Вернуть список всех видов документов
      * @return возвращает список всех видов документов
      */
-    @GetMapping("")
-    public List<DocumentTypeDto> allDocs() {
+    @GetMapping
+    public List<DocumentTypeDto> getAllDocs() {
         return documentTypeService.docTypes();
     }
 }

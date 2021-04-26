@@ -14,8 +14,8 @@ COMMENT ON TABLE Organization IS 'Организация';
 CREATE TABLE IF NOT EXISTS Office (
     id                  BIGINT                  COMMENT 'Уникальный идентификатор' PRIMARY KEY AUTO_INCREMENT ,
     version             INTEGER NOT NULL        COMMENT 'Служебное поле hibernate',
-    name                VARCHAR(150) NOT NULL   COMMENT 'Название',
-    address             VARCHAR(255) NOT NULL   COMMENT 'Адрес',
+    name                VARCHAR(150)            COMMENT 'Название',
+    address             VARCHAR(255)            COMMENT 'Адрес',
     phone               VARCHAR(30)             COMMENT 'Телефон',
     is_active           BOOLEAN DEFAULT true    COMMENT 'Просто boolean',
     organization_id     BIGINT  NOT NULL        COMMENT 'Уникальный идентификатор организации'
